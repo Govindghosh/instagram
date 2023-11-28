@@ -38,6 +38,18 @@ export class AuthService  {
             console.log("appwrite-auth : logout : error: ", error);
         }
     };
-    async getCurrentUser(){};
-    async passwordRecovery(){};
+    async getCurrentUser(){
+        try {
+           return await this.account.get();
+        } catch (error) {
+            console.log("appwrite-auth : getCurrentUser : error: ", error);
+        }
+    };
+    async passwordRecovery(email, phone){
+        try {
+            
+        } catch (error) {
+            
+        }
+    };
 };
