@@ -47,9 +47,13 @@ export class AuthService  {
     };
     async passwordRecovery(email, phone){
         try {
-            
+            return await this.account.createRecovery(email, phone);
         } catch (error) {
-            
+            console.log("appwrite-auth : passwordRecovery : error: ", error);
         }
     };
 };
+
+const authService = new AuthService();
+
+export default authService;
