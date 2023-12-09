@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { IoMdEye, IoIosEyeOff } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 function SignUpPage() {
   
@@ -88,10 +89,19 @@ function SignUpPage() {
           border={"1px solid gray"}
           padding={5}
           borderRadius={2}
+          
         >
-          <h3>Have an account?TODO</h3>
+          <h3 className="flex justify-center items-center">Have an account?<Link
+            to="/"
+            className="font-medium text-primary transition-all duration-200 hover:underline"
+          >Login</Link></h3>
         </Box>
         </Flex>
+        <Box textAlign={"center"}> Get the app .</Box>
+              <Flex gap={5} p={2} justifyContent={"center"}>
+                <Image  src="/playstore.png" h={10} alt="PlayStore" />
+                <Image  src="/microsoft.png" h={10} alt="Microsoft" />
+              </Flex>
        </Container>
     </>
   );

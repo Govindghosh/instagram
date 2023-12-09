@@ -1,28 +1,44 @@
 import { Box, VStack, Image, Input, Button, InputGroup, InputRightElement, WrapItem, Flex, Text } from '@chakra-ui/react'
 import { IoMdEye, IoIosEyeOff } from "react-icons/io";
 import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
 
 function AuthForm() {
+    const navigate = useNavigate();
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
+    const[inputs, setInputs]=useState({
+      email:'',
+      password:''
+    });
+    const handelAuth = ()=>{
+      console.log("inputs", inputs)
+      navigate("/home")
+    }
   return (
     <>
         <Box border={"1px solid gray"} padding={5} borderRadius={10}>
             <VStack >
                 <Image src='/logo.png' alt='instaLogo' h={24} cursor={"pointer"}/>
                 <Input 
+                    label="Email"
+                    value={Input.email}
+                    onChange={(e)=>setInputs({...inputs,email:e.target.value})}
                     placeholder="Mobile Number or Email"
-                    fontsize={14}/>
+                    fontSize={14}/>
                  
                 <InputGroup>
-                <Input 
+                <Input
+                    label="Password" 
                     placeholder="Password"
                     type={show ? 'text' : 'password'}
-                    fontsize={14}
-                    />
+                    fontSize={14}  // Corrected here
+                    onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
+                />
+
                     <InputRightElement>
                     <Button h='1.75rem' size='sm' onClick={handleClick}>
                      {show ? <IoIosEyeOff /> : <IoMdEye />}
@@ -30,7 +46,7 @@ function AuthForm() {
                     </InputRightElement>
                 </InputGroup>
                 <WrapItem>
-                <Button className="w-64" colorScheme="linkedin">
+                <Button className="w-64" colorScheme="linkedin" onClick={handelAuth}>
                   Log In
                 </Button>
               </WrapItem>
@@ -51,7 +67,10 @@ function AuthForm() {
             
         </Box>
         <Box border={"1px solid gray"} padding={5} borderRadius={0}>
-            <Text p={1}>Don't have an account? Sign up</Text>
+            <Text p={1}>Don't have an account? <Link
+            to="/signup"
+            className="font-medium text-primary transition-all duration-200 hover:underline"
+          >Sign Up</Link></Text>
             </Box>
     
     </>
