@@ -14,6 +14,7 @@ import React, { useState } from "react";
 import { IoMdEye, IoIosEyeOff } from "react-icons/io";
 
 function SignUpPage() {
+  
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   return (

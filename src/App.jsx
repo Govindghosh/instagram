@@ -13,11 +13,12 @@ function App() {
     <>
       <Routes>
         <Route
-              path='/'
+              path='/home'
               element={<HomePage/>}
         />
         <Route
-              path='/auth'
+              // for some reason remove /auth 
+              path='/'
               element={<AuthPage/>}
         />
         <Route

@@ -3,6 +3,7 @@ import { Flex, Container, Box, Image, VStack } from "@chakra-ui/react";
 import AuthForm from "../components/AuthForm";
 
 function AuthPage() {
+  
   return (
     <>
       <Flex
@@ -19,6 +20,7 @@ function AuthPage() {
             </Box>
             {/* Right hand side */}
             <VStack spacing={4} align={"stretch"}>
+
               <AuthForm/>
               <Box textAlign={"center"}> Get the app .</Box>
               <Flex gap={5} justifyContent={"center"}>
