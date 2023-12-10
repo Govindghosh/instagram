@@ -2,6 +2,7 @@ import { Box, VStack, Image, Input, Button, InputGroup, InputRightElement, WrapI
 import { IoMdEye, IoIosEyeOff } from "react-icons/io";
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
 
@@ -16,8 +17,13 @@ function AuthForm() {
     });
     const handelAuth = ()=>{
       console.log("inputs", inputs)
-      navigate("/home")
-    }
+      if (!inputs.email || !inputs.password) {
+        alert("please enter you Email and Password");
+      } else {
+        toast.success("Login Successful !");
+        navigate("/home")
+        }
+    };
   return (
     <>
         <Box border={"1px solid gray"} padding={5} borderRadius={10}>
