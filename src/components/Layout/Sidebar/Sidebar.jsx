@@ -5,7 +5,7 @@ import { InstagramLogo, InstagramMobileLogo, CreatePostLogo, MessagesLogo, Notif
 import { GoHomeFill } from "react-icons/go";
 import { CiSearch } from "react-icons/ci";
 import { Avatar, Tooltip} from "@chakra-ui/react";
-
+import { IoLogOutOutline } from "react-icons/io5";
 
 function Sidebar() {
   const sidebatItem = [
@@ -20,6 +20,7 @@ function Sidebar() {
       link: "",
     },
   ];
+
   return (
     <>
       <Box
@@ -55,43 +56,67 @@ function Sidebar() {
             }}
           >
             <InstagramMobileLogo />
-            </Link>
-            <Flex
+          </Link>
+          <Flex
             direction={"column"}
             cursor={"pointer"}
             gap={5}
-            >
-              {sidebatItem.map((item, index)=>(
-                <Tooltip
-                display={{base: "block", md:"none"}}
+          >
+            {sidebatItem.map((item, index) => (
+              <Tooltip
+                display={{ base: "block", md: "none" }}
                 key={index}
                 hasArrow
                 label={item.text}
                 placement="right"
                 openDelay={500}
                 ml={1}
-                >
-                  <Link
+              >
+                <Link
                   as={RouterLink}
                   to={item.link || null}
                   display={"flex"}
                   gap={4}
                   p={2}
-                  w={{md:"full",base:10}}
+                  w={{ md: "full", base: 10 }}
                   borderRadius={6}
                   alignItems={"center"}
-                  _hover={{bg:"whiteAlpha.400"}}
-                  justifyContent={{base:"center", md:"flex-start"}}
-                  >
+                  _hover={{ bg: "whiteAlpha.400" }}
+                  justifyContent={{ base: "center", md: "flex-start" }}
+                >
                   {item.icon}
-                  <Box display={{base:"none", md:"block"}}>{item.text}</Box>
-                  </Link>
-                </Tooltip>
-              )
-
-              )}
-            </Flex>
+                  <Box display={{ base: "none", md: "block" }}>{item.text}</Box>
+                </Link>
+              </Tooltip>
+            ))}
+          </Flex>
         </Flex>
+            <Tooltip
+              display={{ base: "block", md: "none" }}
+              hasArrow
+              label={"Logout"}
+              placement="right"
+              openDelay={500}
+              ml={1}
+            >
+              <Link
+                as={RouterLink}
+                to={"/"}
+                display={"flex"}
+                gap={4}
+                p={2}
+                w={{ md: "full", base: 10 }}
+                borderRadius={6}
+                alignItems={"center"}
+                _hover={{ bg: "whiteAlpha.400" }}
+                justifyContent={{ base: "center", md: "flex-start" }}
+                mt={"auto"}
+                mb={"5"}
+              >
+                <IoLogOutOutline size={"25"} />
+                <Box display={{ base: "none", md: "block" }}>Logout</Box>
+              </Link>
+            </Tooltip>
       </Box>
     </>
   );
