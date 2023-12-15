@@ -8,7 +8,9 @@ function HomePage() {
       <Container maxW={"container.lg"}>
         <Flex gap={5} >
           <Box flex={2}
-          py={10}
+          pt={"120px"}
+          pb={20}
+          
           border={"1px solid blue"}
           >
             <Feed/>
