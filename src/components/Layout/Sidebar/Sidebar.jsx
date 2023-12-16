@@ -1,18 +1,21 @@
 import { Box, Flex, Link } from "@chakra-ui/react";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { InstagramLogo, InstagramMobileLogo, CreatePostLogo, MessagesLogo, NotificationsLogo } from "../../../assets/constants";
+import { InstagramLogo, InstagramMobileLogo, CreatePostLogo, MessagesLogo  } from "../../../assets/constants";
 import { GoHomeFill } from "react-icons/go";
 import { CiSearch } from "react-icons/ci";
 import { Avatar, Tooltip} from "@chakra-ui/react";
 import { IoLogOutOutline } from "react-icons/io5";
+import { LuHeart } from "react-icons/lu";
+import { FaFacebookMessenger } from "react-icons/fa6";
+
 
 function Sidebar() {
   const sidebatItem = [
     { icon: <GoHomeFill size={25} />, text: "Home", link: "/home" },
     { icon: <CiSearch size={25} />, text: "Search" },
-    { icon: <MessagesLogo />, text: "Messages" },
-    { icon: <NotificationsLogo />, text: "Notifications" },
+    { icon: <FaFacebookMessenger size={25}/>, text: "Messages" },
+    { icon: <LuHeart size={25}/>, text: "Notifications" },
     { icon: <CreatePostLogo />, text: "CreatePost", link: "" },
     {
       icon: <Avatar name="Govind ghosh" src="/profilepic.png" size={"sm"} />,

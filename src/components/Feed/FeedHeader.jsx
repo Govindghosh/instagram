@@ -4,12 +4,12 @@ import React from 'react'
 function FeedHeader() {
   return (
     <>
-        <Flex justifyContent={"space-between"} alignItems={"center"} w={"full"} my={2}>
+        <Flex justifyContent={"space-between"} alignItems={"center"} w={"full"} my={2} cursor={"pointer"}>
             <Flex alignItems={"center"} gap={2}>
               <Avatar src='/img1.png' alt='userProfile' size={"sm"}/>
               <Flex fontSize={12} fontWeight={"bold"} gap={2}>Govind Ghosh 
-              <Box color={"gray.500"}>•
-                21h</Box>
+              <Box color={"gray.500"}>
+                • 21h</Box>
               </Flex>
             </Flex>
             <Box cursor={"pointer"}>

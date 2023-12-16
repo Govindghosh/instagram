@@ -7,7 +7,7 @@ function FeedBody() {
   return (
     <>
         <FeedHeader/>
-            <Box>
+            <Box my={2} cursor={"pointer"}>
                 <Image src='https://i.pinimg.com/736x/a5/47/c3/a547c3f7c4a6cd99c4d9782c5a1a34f5.jpg' alt='Image'/>
             </Box>
         <FeedFooter/>
