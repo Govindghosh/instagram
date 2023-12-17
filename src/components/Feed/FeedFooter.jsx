@@ -1,6 +1,6 @@
 import { Box, Flex, Text, Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { GoHeart } from "react-icons/go";
+//import { GoHeart } from "react-icons/go";
 import { FiSend } from "react-icons/fi";
 import {
   CommentLogo,
@@ -9,9 +9,9 @@ import {
   SaveLogo
 } from "../../assets/constants";
 
-function FeedFooter() {
+function FeedFooter({userName}) {
   const [liked, setLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(Infinity);
+  const [likeCount, setLikeCount] = useState(" ");
   const [comment, setComment] = useState('');
   const handleLikes = () => {
     if (liked) {
@@ -55,7 +55,7 @@ function FeedFooter() {
         {likeCount} likes
       </Text>
       <Text fontWeight={600} fontSize={"sm"}>
-        userName{" "}
+        {userName}{" "}
         <Text as="span" fontWeight={300}>
           userCaption
         </Text>

@@ -3,14 +3,17 @@ import FeedHeader from './FeedHeader'
 import FeedFooter from './FeedFooter'
 import { Box, Image } from '@chakra-ui/react'
 
-function FeedBody() {
+function FeedBody({img, userName, avatar}) {
   return (
     <>
-        <FeedHeader/>
-            <Box my={2} cursor={"pointer"}>
-                <Image src='https://i.pinimg.com/736x/a5/47/c3/a547c3f7c4a6cd99c4d9782c5a1a34f5.jpg' alt='Image'/>
+        <FeedHeader userName={userName} avatar={avatar}/>
+            <Box my={2} cursor={"pointer"}
+            overflow={"hidden"}
+            borderRadius={4}
+            >
+                <Image src={img} alt='Image'/>
             </Box>
-        <FeedFooter/>
+        <FeedFooter userName={userName}/>
     </>
   )
 }

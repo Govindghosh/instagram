@@ -1,13 +1,13 @@
 import { Avatar, Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 
-function FeedHeader() {
+function FeedHeader({userName, avatar}) {
   return (
     <>
         <Flex justifyContent={"space-between"} alignItems={"center"} w={"full"} my={2} cursor={"pointer"}>
             <Flex alignItems={"center"} gap={2}>
-              <Avatar src='/img1.png' alt='userProfile' size={"sm"}/>
-              <Flex fontSize={12} fontWeight={"bold"} gap={2}>Govind Ghosh 
+              <Avatar src={avatar} alt='userProfile' size={"sm"}/>
+              <Flex fontSize={12} fontWeight={"bold"} gap={2}>{userName} 
               <Box color={"gray.500"}>
                 • 21h</Box>
               </Flex>
