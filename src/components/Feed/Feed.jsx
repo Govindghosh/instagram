@@ -5,7 +5,9 @@ import FeedBody from "./FeedBody";
 function Feed() {
   return (
     <>
-      <Container maxW={"md"} py={10} px={2} border={"1px solid red"}>
+      <Container maxW={"md"} py={10} px={2} 
+      //border={"1px solid red"}
+      >
         <FeedBody
           avatar="/profilepic.png"
           userName="Govind Ghosh"

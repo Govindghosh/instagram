@@ -30,7 +30,7 @@ function FeedFooter({userName}) {
   return (
     <Box mb={10}>
       <Flex
-        border={"1px solid gray"}
+        
         alignItems={"center"}
         gap={4}
         w={"full"}
