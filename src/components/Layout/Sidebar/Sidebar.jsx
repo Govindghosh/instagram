@@ -20,7 +20,7 @@ function Sidebar() {
     {
       icon: <Avatar name="Govind ghosh" src="/profilepic.png" size={"sm"} />,
       text: "Profile",
-      link: "",
+      link: "/:username",
     },
   ];
 
