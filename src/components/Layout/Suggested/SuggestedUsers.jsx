@@ -10,19 +10,13 @@ import {
   Link,
 } from "@chakra-ui/react";
 import SuggestedUser from "./SuggestedUser";
-
+import useGitHubData from '../../../assets/githubAPI'
 
 
 
 function SuggestedUsers() {
-      const [data, setData]=useState([])
-        useEffect(() => {
-        fetch('https://api.github.com/users/Govindghosh')
-            .then(res => res.json())
-            .then(data =>{
-            //console.log(data);
-            setData(data)
-            }) }, [])
+      const data = useGitHubData();
+      
   return (
     <>
       <VStack py={8} px={6} gap={4}>

@@ -7,12 +7,12 @@ import ProfilePosts from '../components/Profile/ProfilePosts'
 function UserPage() {
   return (
     <>
-      <Container border={"1px solid red"}
+      <Container 
         maxW={"container.lg"}
         py={5}
         >
         <Flex
-        border={"1px solid blue"}
+       
         py={10}
         px={4}
         w={"full"}
@@ -22,9 +22,9 @@ function UserPage() {
         >
            <ProfileHeader/>
         </Flex>
-        <Flex  border={"1px solid blue"}
+        <Flex  
         borderTop={"1px solid"}
-        borderColor={"whiteAlpha.300"}
+        borderColor={"gray.700"}
         maxW={"full"}
         mx={"auto"}
         direction={"column"}
