@@ -2,11 +2,11 @@ import { Flex, GridItem, Image, Text } from '@chakra-ui/react';
 import { AiFillHeart } from 'react-icons/ai';
 import { FaComment } from 'react-icons/fa';
 
-function ProfilePost({ Img }) {
+function ProfilePost({ img }) {
   return (
     <GridItem
       cursor='pointer'
-      borderRadius={2}
+      borderRadius={3}
       overflow='hidden'
       border='1px solid'
       borderColor='whiteAlpha.300'
@@ -42,7 +42,7 @@ function ProfilePost({ Img }) {
           </Flex>
         </Flex>
       </Flex>
-      <Image src={Img} alt='pro' objectFit='cover' w='100%' h='100%' />
+      <Image src={img} alt='pro' objectFit='cover' w='100%' h='100%' />
     </GridItem>
   );
 }

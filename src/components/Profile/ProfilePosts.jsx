@@ -24,7 +24,8 @@ function ProfilePosts() {
         ))
       ) : (
         [0, 1, 2].map((index) => (
-          <ProfilePost key={index} img="https://filmfare.wwmindia.com/photogallery/2023/may/salmankhan11684830563.jpg" />
+          //<ProfilePost key={index} img="https://filmfare.wwmindia.com/photogallery/2023/may/salmankhan11684830563.jpg" />
+          <ProfilePost key={index} img="https://i.pinimg.com/564x/c7/dc/36/c7dc36bcda6451d9c018669bb0ed1806.jpg" />
         ))
       )}
     </Grid>
