@@ -5,8 +5,8 @@ import { FaComment } from 'react-icons/fa';
 function ProfilePost({ img }) {
   return (
     <GridItem
-      cursor='pointer'
       borderRadius={3}
+      cursor='pointer'
       overflow='hidden'
       border='1px solid'
       borderColor='whiteAlpha.300'
