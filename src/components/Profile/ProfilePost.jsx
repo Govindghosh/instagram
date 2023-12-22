@@ -1,9 +1,18 @@
 import { Flex, GridItem, Image, Modal, ModalBody, ModalCloseButton, ModalContent, Box, ModalOverlay, Text, useDisclosure } from '@chakra-ui/react';
+import { useState } from 'react';
 import { AiFillHeart } from 'react-icons/ai';
 import { FaComment } from 'react-icons/fa';
 
 function ProfilePost({ img }) {
+  const OverlayOne = () => (
+    <ModalOverlay
+      bg='blackAlpha.300'
+      backdropFilter='blur(1px) hue-rotate(90deg)'
+    />
+  )
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [overlay, setOverlay] = useState(<OverlayOne />);
   return (
     <>
     <GridItem
@@ -15,7 +24,10 @@ function ProfilePost({ img }) {
       position='relative'
       aspectRatio={1 / 1}
       _hover={{ '.overlay': { display: 'flex' } }}
-      onClick={onOpen}
+      onClick={() => {
+        setOverlay(<OverlayOne />)
+        onOpen()
+      }}
     >
       <Flex
         display='none'
@@ -48,7 +60,8 @@ function ProfilePost({ img }) {
       <Image src={img} alt='pro' objectFit='cover' w='100%' h='100%' />
     </GridItem>
     <Modal isOpen={isOpen} onClose={onClose} isCentered={true} size={{ base: "3xl", md: "5xl" }}>
-        <ModalOverlay />
+        {/* <ModalOverlay /> */}
+        {overlay}
         <ModalContent>
           {/* <ModalHeader>Modal Title</ModalHeader> */}
           <ModalCloseButton color={"black"} />
