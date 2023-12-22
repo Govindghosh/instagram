@@ -4,6 +4,7 @@ import ProfilePost from './ProfilePost';
 
 function ProfilePosts() {
   const [isLoading, setIsLoading] = useState(true);
+  
 
   useEffect(() => {
     // Simulating a data fetch
