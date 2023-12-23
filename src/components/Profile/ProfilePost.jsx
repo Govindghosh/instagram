@@ -1,7 +1,9 @@
-import { Flex, GridItem, Image, Modal, ModalBody, ModalCloseButton, ModalContent, Box, ModalOverlay, Text, useDisclosure } from '@chakra-ui/react';
+import { Flex, GridItem, Image, Modal, ModalBody, ModalCloseButton, ModalContent, Box, ModalOverlay, Text, useDisclosure, Avatar } from '@chakra-ui/react';
 import { useState } from 'react';
 import { AiFillHeart } from 'react-icons/ai';
 import { FaComment } from 'react-icons/fa';
+import { SlOptions } from "react-icons/sl";
+
 
 function ProfilePost({ img }) {
   const OverlayOne = () => (
@@ -81,7 +83,32 @@ function ProfilePost({ img }) {
               flexDir={"column"}
               px={10}
               display={{base:"none", md:"flex"}}
-              >flex</Flex>
+              >
+                <Flex
+                alignItems={"center"}
+                justifyContent={"center"}
+                gap={20}
+                >
+                  <Flex alignItems={"center"}
+                  gap={4}>
+
+
+                  <Avatar
+                  src='/profilepic.png'
+                  size={"sm"}
+                  name='Govind Ghosh'
+                  />
+                  <Text fontWeight={"bold"}
+                  fontSize={12}>Govind Ghosh</Text>
+                  </Flex>
+                  <Box borderRadius={3}
+                  p={1}
+                  
+                  >
+                  <SlOptions size={20} cursor={"pointer"} />
+                  </Box>
+                </Flex>
+                flex</Flex>
             </Flex>
           </ModalBody>
         </ModalContent>
