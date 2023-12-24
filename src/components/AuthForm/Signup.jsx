@@ -2,6 +2,9 @@ import { Input, InputGroup, InputRightElement, Button, Box, WrapItem } from '@ch
 import React, { useState } from 'react';
 import { IoMdEye, IoIosEyeOff } from "react-icons/io";
 import { useNavigate } from 'react-router-dom';
+import { Alert, AlertIcon } from '@chakra-ui/react'
+import useSignupWithEmailAndPassword from '../../Hook/useSignupWithEmailAndPassword';
+
 
 
 
@@ -10,15 +13,15 @@ function Signup() {
     const navigate = useNavigate();
     const [show, setShow] = useState(false);
     const handleClick = () => setShow(!show);
-
-    const handelSignup = ()=>{
-      console.log("inputs", inputs)
-      if (!inputs.email || !inputs.password) {
-        alert("please enter you Email and Password");
-      } else {
-        navigate("/home")
-        }
-    };
+    const { loading, error, signup } = useSignupWithEmailAndPassword();
+    // const handelSignup = ()=>{
+    //   console.log("inputs", inputs)
+    //   if (!inputs.email || !inputs.password) {
+    //     alert("please enter you Email and Password");
+    //   } else {
+    //     navigate("/home")
+    //     }
+    // };
 
     const [inputs, setInputs]=useState({
       fullName: "",
@@ -65,6 +68,12 @@ function Signup() {
                     </Button>
                     </InputRightElement>
                 </InputGroup>
+                {error &&(
+                    <Alert status='error' p={2} fontSize={13} borderRadius={4}>
+                    <AlertIcon fontSize={12} />
+                    {error.message}
+                  </Alert>
+                )}
                 <Box
                 className="text-sm text-gray-600 text-center"
                 maxW={350}
@@ -83,8 +92,9 @@ function Signup() {
               </Box>
               <WrapItem>
                 <Button className="w-64" colorScheme="linkedin"
-                onClick={handelSignup}
-                >
+                isLoading={loading}
+                onClick={()=>signup(inputs)}
+                  >
                   Sign Up
                 </Button>
               </WrapItem>

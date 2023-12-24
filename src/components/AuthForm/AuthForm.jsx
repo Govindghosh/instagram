@@ -2,6 +2,7 @@ import { Box, VStack, Image, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom';
 import Login from './Login';
+import FacebookAuth from './FacebookAuth';
 
 
 
@@ -20,10 +21,7 @@ function AuthForm() {
                         <Text color={"black"}>OR</Text>
                         <Box flex={2} h={"1px"} bg={"gray.400"}/>
                     </Flex>
-                    <Flex gap={1}>
-                      <Image src='/facebook.png' alt='Facebook-icon' h={"20px"}/>
-                      <Text className='text-sm text-sky-700 font-semibold'>Log in with Facebook</Text>
-                    </Flex>
+                    <FacebookAuth/>
                     <Flex p={2}>
                       <Text className='text-sky-700 text-xs'>Forgot Password?</Text>
                     </Flex>
