@@ -1,11 +1,43 @@
-import { Flex, GridItem, Image, Modal, ModalBody, ModalCloseButton, ModalContent, Box, ModalOverlay, Text, useDisclosure, Avatar } from '@chakra-ui/react';
+import { Flex, GridItem, Image, Modal, ModalBody, ModalCloseButton, 
+  ModalContent, Box, ModalOverlay, Text, useDisclosure, Avatar,
+  Divider, Input, InputGroup, InputRightElement, Button,
+  VStack} from '@chakra-ui/react';
+  import { GoHeart } from "react-icons/go";
+  import { MdOutlineModeComment } from "react-icons/md";
+import Comment from '/src/components/Comment/Comment';
 import { useState } from 'react';
 import { AiFillHeart } from 'react-icons/ai';
 import { FaComment } from 'react-icons/fa';
 import { SlOptions } from "react-icons/sl";
+import {
+  CommentLogo,
+  NotificationsLogo,
+  UnlikeLogo,
+  SaveLogo
+} from "../../assets/constants";
+import { FiSend } from "react-icons/fi";
+
 
 
 function ProfilePost({ img }) {
+
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(" ");
+  const [comment, setComment] = useState('');
+  const handleLikes = () => {
+    if (liked) {
+      setLiked(false);
+      setLikeCount(likeCount - 1);
+    } else {
+      setLiked(true);
+      setLikeCount(likeCount + 1);
+    }
+  };
+  const handlePostComment = () => {
+    console.log('Posting comment:', comment);
+    setComment('');
+  };
+
   const OverlayOne = () => (
     <ModalOverlay
       bg='blackAlpha.300'
@@ -83,17 +115,15 @@ function ProfilePost({ img }) {
               flexDir={"column"}
               px={10}
               display={{base:"none", md:"flex"}}
+              gap={3}
               >
                 <Flex
                 alignItems={"center"}
-                justifyContent={"center"}
-                gap={20}
+                justifyContent={"space-between"}
                 >
                   <Flex alignItems={"center"}
                   gap={4}>
-
-
-                  <Avatar
+                 <Avatar
                   src='/profilepic.png'
                   size={"sm"}
                   name='Govind Ghosh'
@@ -103,12 +133,97 @@ function ProfilePost({ img }) {
                   </Flex>
                   <Box borderRadius={3}
                   p={1}
-                  
                   >
                   <SlOptions size={20} cursor={"pointer"} />
                   </Box>
                 </Flex>
+                <Divider  bg={"gray.300"}/>
+                <VStack w={"full"}
+                alignItems={"start"}
+                overflowY={"auto"}
+                maxH={"350px"}
+                >
+                  <Comment 
+                  createAt={"1d ago"}
+                  username={"raghav"}
+                  profilePic={"https://i.pinimg.com/564x/4e/6c/b2/4e6cb2b0ec89722d85ae7c51bfeca34f.jpg"}
+                  text={"Nice pic"}
+                  />
+                  <Comment 
+                  createAt={"1d ago"}
+                  username={"rahul"}
+                  profilePic={"https://i.pinimg.com/564x/e9/e3/a9/e9e3a94162e49f441f390b6b3a24ecb6.jpg"}
+                  text={"Nice pic"}
+                  />
+                  <Comment 
+                  createAt={"1d ago"}
+                  username={"anant"}
+                  profilePic={"https://i.pinimg.com/564x/75/7c/34/757c340faa9f2cd7ec48776efad47d93.jpg"}
+                  text={"Nice pic"}
+                  />
+                </VStack>
+
+
+                
+                <Box mb={10} >
+                  <Flex
+                    
+                    alignItems={"center"}
+                    gap={4}
+                    w={"full"}
+                    pt={0}
+                    mb={2}
+                    cursor={"pointer"}
+                  >
+                    <Box onClick={handleLikes}>
+                      {!liked ? <GoHeart size={25}/> : <UnlikeLogo />}
+                    </Box>
+                    <Box>
+                      {/* <CommentLogo /> */}
+                      <MdOutlineModeComment size={25}/>
+                    </Box>
+                    <Box>
+                      <FiSend size={25} />
+                    </Box>
+                    <Box ml={"auto"}>
+                      <SaveLogo />
+                    </Box>
+                  </Flex>
+                  <Text fontWeight={500} fontSize={"sm"}>
+                    {likeCount} likes
+                  </Text>
+                <Flex 
+                  alignItems={"center"}
+                  gap={2}
+                  w={"full"}
+                  justifyContent={"space-between"}
+                  >
+                    <InputGroup>
+                    <Input
+                    placeholder="Add a comment…"
+                    fontSize={14}
+                    variant={"flushed"}
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    />
+                    
+                      <InputRightElement>
+                      {comment && ( <Button
+                        bg={"transparent"}
+                        fontSize={14}
+                        color={"blue.500"}
+                        fontWeight={500}
+                        _hover={{color: "gray.400"}}
+                        onClick={handlePostComment}
+                        >Post</Button> )}
+                      </InputRightElement>
+                    </InputGroup>
+                  </Flex>
+                </Box>
                 flex</Flex>
+
+
+
             </Flex>
           </ModalBody>
         </ModalContent>
