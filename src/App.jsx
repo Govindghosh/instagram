@@ -34,15 +34,6 @@ function App() {
               path='/:username'
               element={<UserPage/>}
         />
-        {/* rendring for Login */}
-        <Route
-              path='/Login'
-              element={<Login/>}
-        />
-        <Route
-              path='/ssignup'
-              element={<Signup/>}
-        />
       </Routes>
       </PageLayout>
     </>
