@@ -9,7 +9,7 @@ import {
   SaveLogo
 } from "../../assets/constants";
 
-function FeedFooter({userName}) {
+function FeedFooter({userName, isProfilePage}) {
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(" ");
   const [comment, setComment] = useState('');
@@ -28,7 +28,9 @@ function FeedFooter({userName}) {
   };
 
   return (
-    <Box mb={10}>
+    <Box mb={10}
+    mt={"auto"}
+    >
       <Flex
         
         alignItems={"center"}
@@ -37,6 +39,7 @@ function FeedFooter({userName}) {
         pt={0}
         mb={2}
         cursor={"pointer"}
+        
       >
         <Box onClick={handleLikes}>
           {!liked ? <NotificationsLogo /> : <UnlikeLogo />}
@@ -54,7 +57,9 @@ function FeedFooter({userName}) {
       <Text fontWeight={500} fontSize={"sm"}>
         {likeCount} likes
       </Text>
-      <Text fontWeight={600} fontSize={"sm"}>
+      {!isProfilePage && (
+        <>
+        <Text fontWeight={600} fontSize={"sm"}>
         {userName}{" "}
         <Text as="span" fontWeight={300}>
           userCaption
@@ -63,6 +68,9 @@ function FeedFooter({userName}) {
       <Text fontSize={"sm"} color={"gray"}>
         View all 38 comments
       </Text>
+        </>
+      )}
+      
       <Flex 
       alignItems={"center"}
       gap={2}

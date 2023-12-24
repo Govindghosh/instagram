@@ -5,6 +5,8 @@ import AuthPage from './Pages/AuthPage'
 import SignUpPage from './Pages/SignUpPage'
 import PageLayout from './components/Layout/PageLayout'
 import UserPage from './Pages/UserPage'
+import Login from './components/AuthForm/Login'
+import Signup from './components/AuthForm/Signup'
 
 
 
@@ -31,6 +33,15 @@ function App() {
         <Route
               path='/:username'
               element={<UserPage/>}
+        />
+        {/* rendring for Login */}
+        <Route
+              path='/Login'
+              element={<Login/>}
+        />
+        <Route
+              path='/ssignup'
+              element={<Signup/>}
         />
       </Routes>
       </PageLayout>

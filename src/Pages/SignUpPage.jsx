@@ -13,11 +13,15 @@ import {
 import React, { useState } from "react";
 import { IoMdEye, IoIosEyeOff } from "react-icons/io";
 import { Link } from "react-router-dom";
+import Signup from "../components/AuthForm/Signup";
 
 function SignUpPage() {
   
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+
+  
+
   return (
     <>
       <Container  maxW={"container.md"} padding={5}>
@@ -41,43 +45,8 @@ function SignUpPage() {
                   Log in with Facebook
                 </Button>
               </WrapItem>
-              <Input placeholder="Mobile Number or Email" fontsize={14} />
-              <Input placeholder="Username" fontsize={14} />
-              <Input placeholder="Full Name" fontsize={14} />
-              <InputGroup>
-                <Input
-                  placeholder="Password"
-                  type={show ? "text" : "password"}
-                  fontsize={14}
-                />
-                <InputRightElement>
-                  <Button h="1.75rem" size="sm" onClick={handleClick}>
-                    {show ? <IoIosEyeOff /> : <IoMdEye />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              <Input placeholder="Confirm Password" fontsize={14} />
-              <Box
-                className="text-sm text-gray-600 text-center"
-                maxW={350}
-                padding={2}
-              >
-                People who use our service may have uploaded your contact
-                information to Instagram. Learn More
-              </Box>
-              <Box
-                className="text-sm text-gray-600 text-center"
-                maxW={350}
-                padding={2}
-              >
-                By signing up, you agree to our Terms , Privacy Policy and
-                Cookies Policy .
-              </Box>
-              <WrapItem>
-                <Button className="w-64" colorScheme="linkedin">
-                  Sign Up
-                </Button>
-              </WrapItem>
+              <Signup/>
+              
             </VStack>
           </Box>
         </Flex>

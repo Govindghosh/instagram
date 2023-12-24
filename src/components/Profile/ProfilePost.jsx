@@ -16,6 +16,7 @@ import {
   SaveLogo
 } from "../../assets/constants";
 import { FiSend } from "react-icons/fi";
+import FeedFooter from '../Feed/FeedFooter';
 
 
 
@@ -161,69 +162,12 @@ function ProfilePost({ img }) {
                   profilePic={"https://i.pinimg.com/564x/75/7c/34/757c340faa9f2cd7ec48776efad47d93.jpg"}
                   text={"Nice pic"}
                   />
+                  
+                  
+                  
                 </VStack>
-
-
-                
-                <Box mb={10} >
-                  <Flex
-                    
-                    alignItems={"center"}
-                    gap={4}
-                    w={"full"}
-                    pt={0}
-                    mb={2}
-                    cursor={"pointer"}
-                  >
-                    <Box onClick={handleLikes}>
-                      {!liked ? <GoHeart size={25}/> : <UnlikeLogo />}
-                    </Box>
-                    <Box>
-                      {/* <CommentLogo /> */}
-                      <MdOutlineModeComment size={25}/>
-                    </Box>
-                    <Box>
-                      <FiSend size={25} />
-                    </Box>
-                    <Box ml={"auto"}>
-                      <SaveLogo />
-                    </Box>
-                  </Flex>
-                  <Text fontWeight={500} fontSize={"sm"}>
-                    {likeCount} likes
-                  </Text>
-                <Flex 
-                  alignItems={"center"}
-                  gap={2}
-                  w={"full"}
-                  justifyContent={"space-between"}
-                  >
-                    <InputGroup>
-                    <Input
-                    placeholder="Add a comment…"
-                    fontSize={14}
-                    variant={"flushed"}
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    />
-                    
-                      <InputRightElement>
-                      {comment && ( <Button
-                        bg={"transparent"}
-                        fontSize={14}
-                        color={"blue.500"}
-                        fontWeight={500}
-                        _hover={{color: "gray.400"}}
-                        onClick={handlePostComment}
-                        >Post</Button> )}
-                      </InputRightElement>
-                    </InputGroup>
-                  </Flex>
-                </Box>
-                flex</Flex>
-
-
-
+                <FeedFooter isProfilePage={true}/>
+                </Flex>
             </Flex>
           </ModalBody>
         </ModalContent>
