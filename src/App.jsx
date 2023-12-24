@@ -5,8 +5,7 @@ import AuthPage from './Pages/AuthPage'
 import SignUpPage from './Pages/SignUpPage'
 import PageLayout from './components/Layout/PageLayout'
 import UserPage from './Pages/UserPage'
-import Login from './components/AuthForm/Login'
-import Signup from './components/AuthForm/Signup'
+
 
 
 
