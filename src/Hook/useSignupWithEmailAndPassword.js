@@ -1,16 +1,19 @@
-import { doc, setDoc } from "firebase/firestore"
-import { auth, firestore } from "../Firebase/firebaseConfig"
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth"
+import { doc, setDoc } from "firebase/firestore";
+import { auth, firestore } from "../Firebase/firebaseConfig";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import useShowToast from "./useShowToast";
+import authSlice from "../store/authSlice";
 
 
 
 const useSignupWithEmailAndPassword = () => {
-
+    const loginUser = authSlice((state)=> state.login);
+    const logoutUser = authSlice((state)=> state.logout);
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
-
+    const showToast = useShowToast()
     const signup = async (inputs) => {
       if (!inputs.email || !inputs.username || !inputs.fullName || !inputs.password) {
-        console.log("Please Enter Your Field");
+        showToast("Error", "Please fill all the fields", "error");
         return;
       }
   
@@ -18,7 +21,7 @@ const useSignupWithEmailAndPassword = () => {
         const newUser = await createUserWithEmailAndPassword(inputs.email, inputs.password);
   
         if (!newUser && error) {
-          console.log(error);
+          showToast("Error", error, "error");
           return;
         }
   
@@ -38,9 +41,10 @@ const useSignupWithEmailAndPassword = () => {
   
           await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
           localStorage.setItem("user-info", JSON.stringify(userDoc));
+          loginUser
         }
       } catch (error) {
-        console.log(error);
+        showToast("Error", error.message, "error")
       }
     };
   

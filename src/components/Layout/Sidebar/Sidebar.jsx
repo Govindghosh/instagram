@@ -1,4 +1,4 @@
-import { Box, Flex, Link } from "@chakra-ui/react";
+import { Box, Button, Flex, Link } from "@chakra-ui/react";
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { InstagramLogo, InstagramMobileLogo, CreatePostLogo, MessagesLogo  } from "../../../assets/constants";
@@ -8,6 +8,7 @@ import { Avatar, Tooltip} from "@chakra-ui/react";
 import { IoLogOutOutline } from "react-icons/io5";
 import { LuHeart } from "react-icons/lu";
 import { FaFacebookMessenger } from "react-icons/fa6";
+import useLogout from "../../../Hook/useLogout";
 
 
 function Sidebar() {
@@ -23,6 +24,7 @@ function Sidebar() {
       link: "/:username",
     },
   ];
+  const {handelLogout, isLoggingOut} = useLogout
 
   return (
     <>
@@ -103,8 +105,9 @@ function Sidebar() {
               ml={1}
             >
               <Link
-                as={RouterLink}
-                to={"/"}
+                onClick={handelLogout}
+                // as={RouterLink}
+                // to={"/"}
                 display={"flex"}
                 gap={4}
                 p={2}
@@ -117,7 +120,12 @@ function Sidebar() {
                 mb={"5"}
               >
                 <IoLogOutOutline size={"25"} />
-                <Box display={{ base: "none", md: "block" }}>Logout</Box>
+                <Button display={{ base: "none", md: "block" }}
+                variant={"ghost"}
+                _hover={{bg: "transparent"}}
+                isLoading={isLoggingOut}
+                >
+                Logout</Button>
               </Link>
             </Tooltip>
       </Box>
