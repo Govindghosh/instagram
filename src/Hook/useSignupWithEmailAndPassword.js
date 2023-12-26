@@ -1,4 +1,4 @@
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, query, setDoc, where, getDocs } from "firebase/firestore";
 import { auth, firestore } from "../Firebase/firebaseConfig";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import useShowToast from "./useShowToast";
@@ -7,15 +7,25 @@ import authSlice from "../store/authSlice";
 
 
 const useSignupWithEmailAndPassword = () => {
-    const loginUser = authSlice((state)=> state.login);
-    const logoutUser = authSlice((state)=> state.logout);
+    // const loginUser = authSlice((state)=> state.login);
+    // const logoutUser = authSlice((state)=> state.logout);
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
     const showToast = useShowToast()
+   
     const signup = async (inputs) => {
       if (!inputs.email || !inputs.username || !inputs.fullName || !inputs.password) {
         showToast("Error", "Please fill all the fields", "error");
         return;
       }
+
+      const usersRef = collection(firestore, "users");
+      const q = query(usersRef, where("username", "==", inputs.username));
+      const querySnapshot = await getDocs(q);
+      if (!querySnapshot.empty) {
+        showToast("Error", "username already taken", "error");
+        return
+      }
+      
   
       try {
         const newUser = await createUserWithEmailAndPassword(inputs.email, inputs.password);
@@ -41,7 +51,7 @@ const useSignupWithEmailAndPassword = () => {
   
           await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
           localStorage.setItem("user-info", JSON.stringify(userDoc));
-          loginUser
+          // loginUser(userDoc);
         }
       } catch (error) {
         showToast("Error", error.message, "error")
