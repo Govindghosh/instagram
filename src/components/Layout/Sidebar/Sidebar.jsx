@@ -9,6 +9,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 import { LuHeart } from "react-icons/lu";
 import { FaFacebookMessenger } from "react-icons/fa6";
 import useLogout from "../../../Hook/useLogout";
+import { useDispatch } from "react-redux";
 
 
 function Sidebar() {
@@ -25,7 +26,10 @@ function Sidebar() {
     },
   ];
   const {handelLogout, isLoggingOut} = useLogout
-
+  const dispatch = useDispatch();
+  const logoutHandler = ()=>{
+    // here start your code 
+  }
   return (
     <>
       <Box
@@ -124,6 +128,7 @@ function Sidebar() {
                 variant={"ghost"}
                 _hover={{bg: "transparent"}}
                 isLoading={isLoggingOut}
+                onClick={logoutHandler}
                 >
                 Logout</Button>
               </Link>
