@@ -24,7 +24,7 @@ function Sidebar() {
       link: "/:username",
     },
   ];
-  const {handelLogout, isLoggingOut} = useLogout
+  const {handelLogout, isLoggingOut} = useLogout();
 
   return (
     <>
