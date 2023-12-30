@@ -53,6 +53,10 @@ const useSignUpWithEmailAndPassword = () => {
         return;
       }
       if (newUser) {
+        const currentDate = new Date();
+        const formattedDate = `${currentDate.getDate()}-${
+          currentDate.getMonth() + 1
+        }-${currentDate.getFullYear()}`;
         const userDoc = {
           uid: newUser.user.uid,
           email: inputs.email,
@@ -63,7 +67,7 @@ const useSignUpWithEmailAndPassword = () => {
           followers: [],
           following: [],
           posts: [],
-          createdAt: Date.now(),
+          createdAt: formattedDate,
         };
         await setDoc(doc(firestore, "users", newUser.user.uid), userDoc);
         localStorage.setItem("user-info", JSON.stringify(userDoc));

@@ -5,12 +5,14 @@ import AuthPage from "./Pages/AuthPage";
 import SignUpPage from "./Pages/SignUpPage";
 import PageLayout from "./components/Layout/PageLayout";
 import UserPage from "./Pages/UserPage";
-import AuthLayout from "./components/AuthLayout";
-import { useSelector } from "react-redux";
+import { useIdToken } from "react-firebase-hooks/auth";
+import { auth } from "./Firebase/firebaseConfig";
+//import AuthLayout from "./components/AuthLayout";
+//import { useSelector } from "react-redux";
 
 function App() {
-  const authUser = useSelector((state) => state.auth.user);
-
+  //const authUser = useSelector((state) => state.auth.user);
+  const [authUser] = useIdToken(auth);
   return (
     <>
       <PageLayout>
@@ -28,9 +30,9 @@ function App() {
           <Route
             path="/:username"
             element={
-              <AuthLayout>
-                <UserPage />
-              </AuthLayout>
+              // <AuthLayout>
+              authUser ? <UserPage /> : <Navigate to="/" />
+              // </AuthLayout>
             }
           />
         </Routes>
