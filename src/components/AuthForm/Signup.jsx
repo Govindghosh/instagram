@@ -87,7 +87,6 @@ function Signup() {
           colorScheme="linkedin"
           isLoading={loading}
           onClick={() => handleSignup(inputs)}
-          //onClick={() => signup(inputs)}
         >
           Sign Up
         </Button>

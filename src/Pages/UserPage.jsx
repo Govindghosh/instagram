@@ -4,7 +4,9 @@ import ProfileHeader from '../components/Profile/ProfileHeader'
 import ProfileTabs from '../components/Profile/ProfileTabs'
 import ProfilePosts from '../components/Profile/ProfilePosts'
 
+
 function UserPage() {
+  
   return (
     <>
       <Container 
