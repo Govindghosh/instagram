@@ -5,6 +5,7 @@ import { Link as RouterLink } from "react-router-dom";
 
 function SuggestedHeader() {
   const authUser = useSelector((state) => state.auth.user);
+  if (!authUser) return null;
 
   return (
     <>
