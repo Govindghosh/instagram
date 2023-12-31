@@ -12,8 +12,6 @@ function UserPage() {
   const { isLoading, userProfile } = useGetUserProfileByUsername(username);
   const userNotFound = !isLoading && !userProfile;
 
-  if (userNotFound) return <UserNotFound />;
-
   return (
     <>
       <Container maxW={"container.lg"} py={5}>
