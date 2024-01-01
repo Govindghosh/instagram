@@ -5,12 +5,8 @@ import {Link as RouterLink} from 'react-router-dom'
 
 
 function SuggestedHeader() {
-<<<<<<< HEAD
   const authUser = useSelector((state) => state.auth.user);
-  if (!authUser) return null;
 
-=======
->>>>>>> parent of 6ddb709 ([build]:i pass user doc by rudex)
   return (
     <>
       <Flex 

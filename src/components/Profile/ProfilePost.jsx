@@ -118,32 +118,16 @@ function ProfilePost({ img }) {
               display={{base:"none", md:"flex"}}
               gap={3}
               >
-<<<<<<< HEAD
                 <Flex alignItems={"center"} justifyContent={"space-between"}>
                   <Flex alignItems={"center"} gap={4}>
                     <Avatar
-                      src={authUser.profilePicURL || "fallback_image_url"}
+                      src={authUser.profilePicURL}
                       size={"sm"}
-                      name={authUser.fullName || "Fallback Name"}
+                      name={authUser.fullName}
                     />
                     <Text fontWeight={"bold"} fontSize={12}>
                       {authUser.fullName}
                     </Text>
-=======
-                <Flex
-                alignItems={"center"}
-                justifyContent={"space-between"}
-                >
-                  <Flex alignItems={"center"}
-                  gap={4}>
-                 <Avatar
-                  src='/profilepic.png'
-                  size={"sm"}
-                  name='Govind Ghosh'
-                  />
-                  <Text fontWeight={"bold"}
-                  fontSize={12}>Govind Ghosh</Text>
->>>>>>> parent of 6ddb709 ([build]:i pass user doc by rudex)
                   </Flex>
                   <Box borderRadius={3}
                   p={1}
