@@ -1,17 +1,12 @@
-import { Container, Flex, Text, Link } from "@chakra-ui/react";
-import React from "react";
-import ProfileHeader from "../components/Profile/ProfileHeader";
-import ProfileTabs from "../components/Profile/ProfileTabs";
-import ProfilePosts from "../components/Profile/ProfilePosts";
-import { useParams } from "react-router-dom";
-import { Link as RouterLink } from "react-router-dom";
-import useGetUserProfileByUsername from "../Hook/useGetUserProfileByUsername";
+import { Container, Flex } from '@chakra-ui/react'
+import React from 'react'
+import ProfileHeader from '../components/Profile/ProfileHeader'
+import ProfileTabs from '../components/Profile/ProfileTabs'
+import ProfilePosts from '../components/Profile/ProfilePosts'
+
 
 function UserPage() {
-  const { username } = useParams();
-  const { isLoading, userProfile } = useGetUserProfileByUsername(username);
-  const userNotFound = !isLoading && !userProfile;
-
+  
   return (
     <>
       <Container maxW={"container.lg"} py={5}>

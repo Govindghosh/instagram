@@ -1,49 +1,51 @@
-import { Avatar, Flex, Link, Text } from "@chakra-ui/react";
-import React from "react";
-import { useSelector } from "react-redux";
-import { Link as RouterLink } from "react-router-dom";
+import { Avatar, Flex, Link, Text } from '@chakra-ui/react'
+import React from 'react'
+import {Link as RouterLink} from 'react-router-dom'
+
+
 
 function SuggestedHeader() {
+<<<<<<< HEAD
   const authUser = useSelector((state) => state.auth.user);
   if (!authUser) return null;
 
+=======
+>>>>>>> parent of 6ddb709 ([build]:i pass user doc by rudex)
   return (
     <>
-      <Flex justifyContent={"space-between"} alignItems={"center"} w={"full"}>
-        <Flex alignItems={"center"} gap={2}>
-          <Link
-          //to={`${authUser.username}`}
-          //as={RouterLink}
-          >
-            <Avatar
-              src={authUser.profilePicURL}
-              name={authUser.fullName}
+      <Flex 
+      justifyContent={"space-between"}
+      alignItems={"center"}
+
+      w={"full"}
+      >
+        <Flex
+        alignItems={"center"}
+        gap={2}
+        >
+            <Avatar src='/profilepic.png'
+            name='Govind Ghosh'
+            
             ></Avatar>
-          </Link>
-          <Link
-            //as={RouterLink}
-            //to={`${authUser.username}`}
-            style={{ textDecoration: "none" }}
-          >
-            <Text fontWeight={"bold"} fontSize={14}>
-              {authUser.username}
-            </Text>
-          </Link>
+            <Text
+            fontWeight={"bold"}
+            fontSize={14}
+            >GovindGhosh</Text>
         </Flex>
         <Link
-          className="no-underline"
-          as={RouterLink}
-          color={"blue.600"}
-          fontSize={12}
-          fontWeight={"bold"}
-          to={"/"}
-          style={{ textDecoration: "none" }}
+        className='no-underline'
+        as={RouterLink}
+        color={"blue.600"}
+        fontSize={12}
+        fontWeight={"bold"}
+        to={"/"}
+        style={{ textDecoration: 'none' }}
         >
-          Switch
+            Switch
         </Link>
       </Flex>
     </>
-  );
+  )
 }
 
-export default SuggestedHeader;
+export default SuggestedHeader

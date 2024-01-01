@@ -1,18 +1,9 @@
-import {
-  Avatar,
-  AvatarGroup,
-  Button,
-  Flex,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Avatar, AvatarGroup, Button, Flex, Text, VStack,  } from "@chakra-ui/react";
 import React from "react";
-import useGitHubData from "../../assets/githubAPI";
-import { useSelector } from "react-redux";
+import useGitHubData from '../../assets/githubAPI'
 
 function ProfileHeader() {
-  const authUser = useSelector((state) => state.auth.user);
-  // const data = useGitHubData();
+  const data=useGitHubData();
   return (
     <>
       <Flex
@@ -27,57 +18,79 @@ function ProfileHeader() {
           alignItems={"flex-start"}
         >
           <Avatar
-            src={authUser.profilePicURL}
-            name={authUser.fullName}
-            alt={authUser.fullName}
+            src="profilepic.png"
+            name="Govind Ghosh"
+            alt="ProfileName Govind GHosh"
           />
         </AvatarGroup>
-        <VStack alignItems={"start"} mx={"auto"} flex={1} gap={2}>
-          <Flex
+        <VStack
+        alignItems={"start"}
+        mx={"auto"}
+        flex={1}
+        gap={2}
+        >
+            <Flex
             gap={4}
-            direction={{ base: "column", sm: "row" }}
+            direction={{base:"column", sm:"row"}}
             w={"full"}
-            justifyContent={{ base: "center", sm: "flex-start" }}
+            justifyContent={{base:"center", sm:"flex-start"}}
             align={"center"}
-          >
-            <Text fontSize={{ base: "sm", sm: "lg" }}>{authUser.username}</Text>
-            <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
-              <Button
-                _hover={{ bg: "whiteAlpha.800" }}
-                size={{ base: "xs", md: "sm" }}
+            >
+              <Text fontSize={{base:"sm", sm:"lg"}}>Govindghosh</Text>
+              <Flex
+              gap={4}
+              alignItems={"center"}
+              justifyContent={"center"}
+              >
+                <Button
+                _hover={{bg:"whiteAlpha.800"}}
+                size={{base:"xs", md:"sm"}}
                 color={"black"}
                 bg={"white"}
-              >
-                Edit profile
-              </Button>
+                >
+                  Edit profile
+                </Button>
+              </Flex>
+
             </Flex>
-          </Flex>
-          <Flex gap={{ base: 2, sm: 4 }} alignItems={"center"}>
-            <Text>
-              <Text mr={"1px"} as="span" fontWeight={"bold"}>
-                69
-              </Text>
-              Post
-            </Text>
-            <Text>
-              <Text mr={"1px"} as="span" fontWeight={"bold"}>
-                69
-              </Text>
-              followers
-            </Text>
-            <Text>
-              <Text mr={"1px"} as="span" fontWeight={"bold"}>
-                69
-              </Text>
-              following
-            </Text>
-          </Flex>
-          <Flex>
-            <Text>{authUser.fullName}</Text>
-          </Flex>
-          <Flex>
-            <Text>{authUser.bio}</Text>
-          </Flex>
+            <Flex
+            gap={{base:2, sm:4}}
+            alignItems={"center"}
+            >
+                <Text>
+                  <Text mr={"1px"}
+                  as="span"
+                  fontWeight={"bold"}
+                  >
+                    69
+                  </Text>
+                  Post
+                </Text>
+                <Text>
+                  <Text mr={"1px"}
+                  as="span"
+                  fontWeight={"bold"}
+                  >
+                    69
+                  </Text>
+                  followers
+                </Text>
+                <Text>
+                  <Text mr={"1px"}
+                  as="span"
+                  fontWeight={"bold"}
+                  >
+                    69
+                  </Text>
+                  following
+                </Text>
+            </Flex>
+            <Flex>
+              <Text>Govind Ghosh</Text>
+            </Flex>
+            <Flex>
+              <Text>{data.bio}</Text>
+            </Flex>
         </VStack>
       </Flex>
     </>
