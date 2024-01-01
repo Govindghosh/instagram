@@ -146,9 +146,9 @@ function ProfilePost({ img }) {
                 <Flex alignItems={"center"} justifyContent={"space-between"}>
                   <Flex alignItems={"center"} gap={4}>
                     <Avatar
-                      src={authUser.profilePicURL}
+                      src={authUser.profilePicURL || "fallback_image_url"}
                       size={"sm"}
-                      name={authUser.fullName}
+                      name={authUser.fullName || "Fallback Name"}
                     />
                     <Text fontWeight={"bold"} fontSize={12}>
                       {authUser.fullName}

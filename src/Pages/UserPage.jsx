@@ -43,7 +43,7 @@ function UserPage() {
 
 export default UserPage;
 
-const UserNotFound = () => {
+const userNotFound = () => {
   return (
     <Flex flexDir="column" textAlign={"center"} mx={"auto"}>
       <Text fontSize={"2xl"}>User Not Found</Text>

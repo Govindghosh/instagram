@@ -8,7 +8,7 @@ import { setUserProfile } from "../store/userProfileSlice";
 const useGetUserProfileByUsername = (username) => {
   const [isLoading, setIsLoading] = useState(true);
   const showToast = useShowToast();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const userProfile = useSelector((state) => state.userProfile.userProfile);
 
   useEffect(() => {
@@ -21,26 +21,22 @@ const useGetUserProfileByUsername = (username) => {
         );
         const querySnapshot = await getDocs(q);
 
-        if (querySnapshot.empty) {
-          dispatch(setUserProfile(null)); // Dispatch the setUserProfile action
-          return;
-        }
+        if (querySnapshot.empty) return setUserProfile(null);
 
         let userDoc;
         querySnapshot.forEach((doc) => {
           userDoc = doc.data();
         });
-
-        dispatch(setUserProfile(userDoc)); // Dispatch the setUserProfile action
+        setUserProfile(userDoc);
+        console.log(userDoc);
       } catch (error) {
         showToast("Error", error.message, "error");
       } finally {
         setIsLoading(false);
       }
     };
-
     getUserProfile();
-  }, [dispatch, username, showToast]);
+  }, [setUserProfile, username, showToast]);
 
   return { isLoading, userProfile };
 };
