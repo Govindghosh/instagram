@@ -1,8 +1,8 @@
-import { Container, Flex } from '@chakra-ui/react'
-import React from 'react'
-import ProfileHeader from '../components/Profile/ProfileHeader'
-import ProfileTabs from '../components/Profile/ProfileTabs'
-import ProfilePosts from '../components/Profile/ProfilePosts'
+import { Container, Flex } from "@chakra-ui/react";
+import React from "react";
+import ProfileHeader from "../components/Profile/ProfileHeader";
+import ProfileTabs from "../components/Profile/ProfileTabs";
+import ProfilePosts from "../components/Profile/ProfilePosts";
 
 function UserPage() {
   return (
@@ -16,7 +16,9 @@ function UserPage() {
           pl={{ base: 4, md: 10 }}
           flexDirection={"column"}
         >
-          {!isLoading && userProfile && <ProfileHeader />}
+          {/* {!isLoading && userProfile &&  */}
+          <ProfileHeader />
+          {/* } */}
         </Flex>
         <Flex
           borderTop={"1px solid"}
