@@ -9,8 +9,11 @@ import { IoMdEye, IoIosEyeOff } from "react-icons/io";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useLogin from "../../Hook/useLogin";
+import { useDispatch } from "react-redux";
+import { login as authlogin } from "../../store/authSlice";
 
 function Login() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     email: "",
