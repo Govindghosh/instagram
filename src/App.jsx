@@ -21,7 +21,9 @@ function App() {
         <Routes>
           <Route
             path="/home"
-            element={<AuthLayout><HomePage /></AuthLayout>}
+            element={<AuthLayout>
+              <HomePage />
+              </AuthLayout>}
           />
           <Route
             // for some reason remove /auth
