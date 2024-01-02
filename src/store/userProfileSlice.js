@@ -1,11 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   userProfile: null,
 };
 
 const userProfileSlice = createSlice({
-  name: 'userProfile',
+  name: "userProfile",
   initialState,
   reducers: {
     setUserProfile: (state, action) => {
@@ -15,11 +15,12 @@ const userProfileSlice = createSlice({
       state.userProfile.posts = [action.payload.id, ...state.userProfile.posts];
     },
     deletePost: (state, action) => {
-      state.userProfile.posts = state.userProfile.posts.filter((id) => id !== action.payload);
+      state.userProfile.posts = state.userProfile.posts.filter(
+        (id) => id !== action.payload
+      );
     },
   },
 });
 
 export const { setUserProfile, addPost, deletePost } = userProfileSlice.actions;
-export const userProfileReducer = userProfileSlice.reducer;
-
+export default userProfileSlice.reducer;
