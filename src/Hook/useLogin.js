@@ -2,10 +2,10 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import useShowToast from "./useShowToast";
 import { auth, firestore } from "../Firebase/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 
 const useLogin = () => {
-  const loginUser = useSelector((state) => state.login);
+  // const loginUser = useSelector((state) => state.login);
 
   const showToast = useShowToast();
   const [signInWithEmailAndPassword, loading, error] =
@@ -23,8 +23,8 @@ const useLogin = () => {
       if (userCredentials) {
         const docRef = doc(firestore, "users", userCredentials.user.uid);
         const docSnap = await getDoc(docRef);
-        localStorage.setItem("user-info", JSON.stringify(docSnap.data()));
-        loginUser(docSnap.data());
+        //localStorage.setItem("user-info", JSON.stringify(docSnap.data()));
+        //loginUser(docSnap.data());
       }
     } catch (error) {
       showToast("Error", error.message, "error");

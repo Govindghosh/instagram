@@ -7,8 +7,10 @@ import PageLayout from "./components/Layout/PageLayout";
 import UserPage from "./Pages/UserPage";
 import { useIdToken } from "react-firebase-hooks/auth";
 import { auth } from "./Firebase/firebaseConfig";
-//import AuthLayout from "./components/AuthLayout";
+import AuthLayout from "./components/AuthLayout";
+
 //import { useSelector } from "react-redux";
+
 
 function App() {
   //const authUser = useSelector((state) => state.auth.user);
@@ -19,7 +21,7 @@ function App() {
         <Routes>
           <Route
             path="/home"
-            element={authUser ? <HomePage /> : <Navigate to="/" />}
+            element={<AuthLayout><HomePage /></AuthLayout>}
           />
           <Route
             // for some reason remove /auth
@@ -30,9 +32,9 @@ function App() {
           <Route
             path="/:username"
             element={
-              // <AuthLayout>
-              authUser ? <UserPage /> : <Navigate to="/" />
-              // </AuthLayout>
+               <AuthLayout>
+              <UserPage />
+              </AuthLayout>
             }
           />
         </Routes>
