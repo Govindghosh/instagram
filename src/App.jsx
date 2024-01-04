@@ -9,12 +9,12 @@ import { useIdToken } from "react-firebase-hooks/auth";
 import { auth } from "./Firebase/firebaseConfig";
 import AuthLayout from "./components/AuthLayout";
 
-//import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 function App() {
-  //const authUser = useSelector((state) => state.auth.user);
-  const [authUser] = useIdToken(auth);
+  // const authUser = useSelector((state) => state.auth.user);
+  // const [authUser] = useIdToken(auth);
   return (
     <>
       <PageLayout>

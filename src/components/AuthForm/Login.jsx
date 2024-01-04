@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from "react-redux";
 import {
   Input,
   InputGroup,
@@ -7,14 +8,15 @@ import {
 } from "@chakra-ui/react";
 import { IoMdEye, IoIosEyeOff } from "react-icons/io";
 import React, { useState } from "react";
+import { login, selectLoading, selectError } from "../../store/authSlice";
 import { useNavigate } from "react-router-dom";
-import useLogin from "../../Hook/useLogin";
-import { useDispatch } from "react-redux";
-import { login as authlogin } from "../../store/authSlice";
 
 function Login() {
   const dispatch = useDispatch();
+  const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
   const navigate = useNavigate();
+
   const [inputs, setInputs] = useState({
     email: "",
     password: "",
@@ -23,15 +25,12 @@ function Login() {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
-  const { login, loading } = useLogin();
-
-  const handelLogin = async () => {
-    console.log("inputs", inputs);
-    if (!inputs.email || !inputs.password) {
-      alert("Please enter your Email and Password");
-    } else {
-      await login(inputs);
+  const handleLogin = async () => {
+    try {
+      await dispatch(login({ userData: inputs.email }));
       navigate("/home");
+    } catch (error) {
+      console.log("Login error:", error);
     }
   };
 
@@ -39,7 +38,7 @@ function Login() {
     <>
       <Input
         label="Email"
-        value={Input.email}
+        value={inputs.email}
         onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
         placeholder="Mobile Number or Email"
         fontSize={14}
@@ -50,7 +49,7 @@ function Login() {
           label="Password"
           placeholder="Password"
           type={show ? "text" : "password"}
-          fontSize={14} // Corrected here
+          fontSize={14}
           onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
         />
 
@@ -61,10 +60,16 @@ function Login() {
         </InputRightElement>
       </InputGroup>
       <WrapItem>
-        <Button className="w-64" colorScheme="linkedin" onClick={handelLogin}>
+        <Button
+          className="w-64"
+          colorScheme="linkedin"
+          onClick={handleLogin}
+          isLoading={loading}
+        >
           Log In
         </Button>
       </WrapItem>
+      {error && <p>{error}</p>}
     </>
   );
 }
