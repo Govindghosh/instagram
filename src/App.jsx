@@ -11,7 +11,6 @@ import AuthLayout from "./components/AuthLayout";
 
 import { useSelector } from "react-redux";
 
-
 function App() {
   // const authUser = useSelector((state) => state.auth.user);
   // const [authUser] = useIdToken(auth);
@@ -21,9 +20,11 @@ function App() {
         <Routes>
           <Route
             path="/home"
-            element={<AuthLayout>
-              <HomePage />
-              </AuthLayout>}
+            element={
+              <AuthLayout>
+                <HomePage />
+              </AuthLayout>
+            }
           />
           <Route
             // for some reason remove /auth
@@ -34,9 +35,9 @@ function App() {
           <Route
             path="/:username"
             element={
-               <AuthLayout>
+              //  <AuthLayout>
               <UserPage />
-              </AuthLayout>
+              //  </AuthLayout>
             }
           />
         </Routes>

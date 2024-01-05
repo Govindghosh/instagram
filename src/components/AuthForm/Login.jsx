@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import {
   Input,
   InputGroup,
@@ -7,14 +7,12 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { IoMdEye, IoIosEyeOff } from "react-icons/io";
-import React, { useState } from "react";
-import { login, selectLoading, selectError } from "../../store/authSlice";
+import { useDispatch } from "react-redux";
+import useLogin from "../../Hook/useLogin";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
-  const loading = useSelector(selectLoading);
-  const error = useSelector(selectError);
   const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
@@ -24,16 +22,11 @@ function Login() {
 
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
-
-  const handleLogin = async () => {
-    try {
-      await dispatch(login({ userData: inputs.email }));
-      navigate("/home");
-    } catch (error) {
-      console.log("Login error:", error);
-    }
+  const { login, loading } = useLogin();
+  const handleLogin = async (inputs) => {
+    await login(inputs);
+    navigate("/home");
   };
-
   return (
     <>
       <Input
@@ -63,13 +56,12 @@ function Login() {
         <Button
           className="w-64"
           colorScheme="linkedin"
-          onClick={handleLogin}
           isLoading={loading}
+          onClick={() => handleLogin(inputs)}
         >
           Log In
         </Button>
       </WrapItem>
-      {error && <p>{error}</p>}
     </>
   );
 }
