@@ -1,42 +1,47 @@
+// useGetUserProfileByUsername.js
+import { useToast } from "@chakra-ui/react";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux"; // Import useSelector and useDispatch
-import useShowToast from "./useShowToast";
-import { collection, query, where, getDocs } from "firebase/firestore";
-import { firestore } from "../Firebase/firebaseConfig";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserProfile } from "../store/userProfileSlice";
+import { selectUserProfile } from "../store/userProfileSlice";
+import { firestore } from "../Firebase/firebaseConfig";
 
 const useGetUserProfileByUsername = (username) => {
   const [isLoading, setIsLoading] = useState(true);
-  const showToast = useShowToast();
-  // const dispatch = useDispatch();
-  const userProfile = useSelector((state) => state.userProfile.userProfile);
+  const showToast = useToast();
+  const dispatch = useDispatch();
+  const userProfile = useSelector(selectUserProfile);
 
   useEffect(() => {
     const getUserProfile = async () => {
       setIsLoading(true);
       try {
         const q = query(
-          collection(firestore, "users"),
+          collection(firestore, "user"),
           where("username", "==", username)
         );
         const querySnapshot = await getDocs(q);
 
-        if (querySnapshot.empty) return setUserProfile(null);
-
-        let userDoc;
-        querySnapshot.forEach((doc) => {
-          userDoc = doc.data();
-        });
-        setUserProfile(userDoc);
-        console.log(userDoc);
+        if (querySnapshot.empty()) {
+          dispatch(setUserProfile(null));
+        } else {
+          let userDoc;
+          querySnapshot.forEach((doc) => {
+            userDoc = doc.data();
+          });
+          dispatch(setUserProfile(userDoc));
+          console.log(userDoc);
+        }
       } catch (error) {
         showToast("Error", error.message, "error");
       } finally {
         setIsLoading(false);
       }
     };
+
     getUserProfile();
-  }, [setUserProfile, username, showToast]);
+  }, [dispatch, username, showToast]);
 
   return { isLoading, userProfile };
 };

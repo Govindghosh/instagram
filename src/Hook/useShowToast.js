@@ -3,15 +3,18 @@ import { useCallback } from "react";
 
 const useShowToast = () => {
   const toast = useToast();
-  const showToast = (title, description, status) => {
-    toast({
-      title: title,
-      description: description,
-      status: status,
-      duration: 10000,
-      isClosable: true,
-    });
-  };
+  const showToast = useCallback(
+    (title, description, status) => {
+      toast({
+        title: title,
+        description: description,
+        status: status,
+        duration: 500,
+        isClosable: true,
+      });
+    },
+    [toast]
+  );
   return showToast;
 };
 
