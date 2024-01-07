@@ -7,12 +7,13 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
-import useGitHubData from "../../assets/githubAPI";
+//import useGitHubData from "../../assets/githubAPI";
 import { useSelector } from "react-redux";
 
 function ProfileHeader() {
   const authUser = useSelector((state) => state.auth.user);
-  const data = useGitHubData();
+  //const data = useGitHubData();
+
   return (
     <>
       <Flex

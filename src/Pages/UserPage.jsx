@@ -19,7 +19,9 @@ function UserPage() {
   const { username } = useParams();
   const { isLoading, userProfile } = useGetUserProfileByUsername(username);
   const userNotFound = !isLoading && !userProfile;
-  if (userNotFound) return <UserNotFound />;
+  if (userNotFound) {
+    return <UserNotFound />;
+  }
   return (
     <>
       <Container maxW={"container.lg"} py={5}>
@@ -83,7 +85,7 @@ const UserNotFound = () => {
       <Text fontSize={"2xl"}>User Not Found</Text>
       <Link
         as={RouterLink}
-        to={"/"}
+        to={"/home"}
         color={"blue.500"}
         w={"max-content"}
         mx={"auto"}
