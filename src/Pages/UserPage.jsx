@@ -7,18 +7,17 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import ProfileHeader from "../components/Profile/ProfileHeader";
 import ProfileTabs from "../components/Profile/ProfileTabs";
 import ProfilePosts from "../components/Profile/ProfilePosts";
-import { useParams } from "react-router-dom";
-import useGetUserProfileByUsername from "../Hook/useGetUserProfileByUsername";
 import { Link as RouterLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function UserPage() {
-  const { username } = useParams();
-  const { isLoading, userProfile } = useGetUserProfileByUsername(username);
-  const userNotFound = !isLoading && !userProfile;
+  const [isLoading, setIsloading] = useState(false);
+  const userData = useSelector((state) => state.auth.user);
+  const userNotFound = !userData;
   if (userNotFound) {
     return <UserNotFound />;
   }
@@ -33,7 +32,7 @@ function UserPage() {
           pl={{ base: 4, md: 10 }}
           flexDirection={"column"}
         >
-          {!isLoading && userProfile && <ProfileHeader />}
+          {userData && <ProfileHeader />}
           {isLoading && <ProfileHeaderSkeleton />}
         </Flex>
         <Flex

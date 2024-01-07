@@ -3,16 +3,15 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userProfile: null,
 };
-
-const userProfileSlice = createSlice({
-  name: "userProfile",
+const profileSlice = createSlice({
+  name: "profileSlice",
   initialState,
   reducers: {
     setUserProfile: (state, action) => {
-      state.userProfile = action.payload.userProfile;
+      state.userProfile = action.payload;
     },
     addPost: (state, action) => {
-      state.userProfile.posts.push(action.payload);
+      state.posts.push(action.payload);
     },
     deletePost: (state, action) => {
       state.userProfile.posts = state.userProfile.posts.filter(
@@ -21,7 +20,5 @@ const userProfileSlice = createSlice({
     },
   },
 });
-
-export const { setUserProfile, addPost, deletePost } = userProfileSlice.actions;
-export const selectUserProfile = (state) => state.userProfile.userProfile;
-export default userProfileSlice.reducer;
+export const { setUserProfile, addPost, deletePost } = profileSlice.actions;
+export default profileSlice.reducer;
