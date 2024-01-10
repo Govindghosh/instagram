@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Avatar,
   Button,
@@ -17,8 +17,11 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
+import usePreviewImg from "../../Hook/usePreviewImg";
 
 const EditProfile = ({ isOpen, onClose }) => {
+  const fileRef = useRef(null);
+  const { selectedFile, handleImageChange } = usePreviewImg(fileRef);
   const [inputs, setInputs] = useState({
     fullName: "",
     bio: "",
@@ -27,7 +30,9 @@ const EditProfile = ({ isOpen, onClose }) => {
   const handleEditProfile = () => {
     console.log(inputs);
   };
+  
   const authUser = useSelector((state) => state.auth.user);
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -59,16 +64,24 @@ const EditProfile = ({ isOpen, onClose }) => {
                     <Center>
                       <Avatar
                         size="xl"
-                        src={authUser.profilePicURL}
+                        src={selectedFile || authUser.profilePicURL}
+                        alt={authUser.username}
                         border={"2px solid white "}
                       />
                     </Center>
                     <Center w="full">
-                      <Button w="full">Edit Profile Picture</Button>
+                      <Button w="full" onClick={() => fileRef.current.click()}>
+                        Edit Profile Picture
+                      </Button>
                     </Center>
+                    <Input
+                      type="file"
+                      hidden
+                      ref={fileRef}
+                      onChange={handleImageChange}
+                    />
                   </Stack>
                 </FormControl>
-
                 <FormControl>
                   <FormLabel fontSize={"sm"}>Full Name</FormLabel>
                   <Input
@@ -81,7 +94,6 @@ const EditProfile = ({ isOpen, onClose }) => {
                     }
                   />
                 </FormControl>
-
                 <FormControl>
                   <FormLabel fontSize={"sm"}>Bio</FormLabel>
                   <Input
@@ -94,7 +106,6 @@ const EditProfile = ({ isOpen, onClose }) => {
                     }
                   />
                 </FormControl>
-
                 <Stack spacing={6} direction={["column", "row"]}>
                   <Button
                     bg={"red.400"}
