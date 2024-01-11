@@ -6,7 +6,7 @@ import profileSlice from "./profileSlice";
 const store = configureStore({
   reducer: {
     auth: authSlice,
-    profile: profileSlice,
+    userProfile: profileSlice,
     // posts: postSlice,
   },
 });

@@ -18,6 +18,8 @@ import {
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import usePreviewImg from "../../Hook/usePreviewImg";
+import useEditProfile from "../../Hook/useEditProfile";
+import useShowToast from "../../Hook/useShowToast";
 
 const EditProfile = ({ isOpen, onClose }) => {
   const fileRef = useRef(null);
@@ -26,11 +28,19 @@ const EditProfile = ({ isOpen, onClose }) => {
     fullName: "",
     bio: "",
   });
+  const { editProfile, isUploading } = useEditProfile();
+  const showToast = useShowToast();
 
-  const handleEditProfile = () => {
+  const handleEditProfile = async () => {
     console.log(inputs);
+    try {
+      await editProfile(inputs, selectedFile);
+      onClose();
+    } catch (error) {
+      showToast("Error", error.message, "error");
+    }
   };
-  
+
   const authUser = useSelector((state) => state.auth.user);
 
   return (
@@ -124,6 +134,7 @@ const EditProfile = ({ isOpen, onClose }) => {
                     w="full"
                     _hover={{ bg: "blue.500" }}
                     onClick={handleEditProfile}
+                    isLoading={isUploading}
                   >
                     Submit
                   </Button>
