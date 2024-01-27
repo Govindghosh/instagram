@@ -8,14 +8,14 @@ import { setUser } from "../store/authSlice";
 import { setUserProfile } from "../store/userProfileSlice";
 
 const useEditProfile = () => {
-  const [isUploading, setIsLoading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const authUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const showToast = useShowToast();
 
   const editProfile = async (inputs, selectedFile) => {
     if (isUploading || !authUser) return;
-    setIsLoading(true);
+    setIsUploading(true);
     const storageRef = ref(storage, `profilePics/${authUser.uid}`);
     const userDocRef = doc(firestore, "users", authUser.uid);
     let URL = "";
@@ -28,7 +28,7 @@ const useEditProfile = () => {
         ...authUser,
         fullName: inputs.fullName || authUser.fullName,
         bio: inputs.bio || authUser.bio,
-        profilePicURL: inputs.profilePicURL || authUser.profilePicURL,
+        profilePicURL: URL || authUser.profilePicURL,
       };
       await updateDoc(userDocRef, updatedUser);
       localStorage.setItem("user-info", JSON.stringify(updatedUser));
@@ -36,7 +36,7 @@ const useEditProfile = () => {
       dispatch(setUserProfile(updatedUser));
       showToast("Success", "Profile updated successfully", "success");
     } catch (error) {
-      showToast("Error", "", "error");
+      showToast("Error", `Profile update failed: ${error.message}`, "error");
     }
   };
   return { editProfile, isUploading };

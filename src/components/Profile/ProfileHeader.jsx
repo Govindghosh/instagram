@@ -14,7 +14,7 @@ import EditProfile from "./EditProfile";
 function ProfileHeader() {
   const authUser = useSelector((state) => state.auth.user);
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  console.log(authUser);
   return (
     <Flex
       gap={{ base: 4, sm: 10 }}
