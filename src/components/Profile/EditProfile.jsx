@@ -32,7 +32,7 @@ const EditProfile = ({ isOpen, onClose }) => {
   const showToast = useShowToast();
 
   const handleEditProfile = async () => {
-    console.log(inputs);
+    console.log(inputs, selectedFile);
     try {
       await editProfile(inputs, selectedFile);
       onClose();

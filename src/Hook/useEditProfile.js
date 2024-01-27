@@ -5,7 +5,7 @@ import { storage, firestore } from "../Firebase/firebaseConfig";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { doc, updateDoc } from "firebase/firestore";
 import { setUser } from "../store/authSlice";
-import { setUserProfile } from "../store/profileSlice";
+import { setUserProfile } from "../store/userProfileSlice";
 
 const useEditProfile = () => {
   const [isUploading, setIsLoading] = useState(false);

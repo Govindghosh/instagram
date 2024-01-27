@@ -29,7 +29,7 @@ function ProfileHeader() {
       >
         <Avatar
           src={authUser.profilePicURL}
-          name="Govind Ghosh"
+          name={authUser.fullName}
           alt={authUser.fullName}
         />
       </AvatarGroup>

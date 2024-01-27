@@ -1,47 +1,49 @@
-// import { useEffect, useState } from "react";
-// import { collection, getDocs, query, where } from "firebase/firestore";
-// import { useDispatch, useSelector } from "react-redux";
-// import { setUserProfile } from "../store/userProfileSlice";
-// import useShowToast from "./useShowToast";
-// import { firestore } from "../Firebase/firebaseConfig";
+import { useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserProfile } from "../store/userProfileSlice";
 
-// const useGetUserProfileByUsername = (uid) => {
-//   const [isLoading, setIsLoading] = useState(true);
-//   const showToast = useShowToast();
-//   const dispatch = useDispatch();
-//   // const userProfile = useSelector((state) => state.userProfile);
+import useShowToast from "./useShowToast";
+import { firestore } from "../Firebase/firebaseConfig";
 
-//   useEffect(() => {
-//     const getUserProfile = async () => {
-//       setIsLoading(true);
-//       try {
-//         const userRef = collection(firestore, "users");
-//         const q = query(userRef, where("uid", "==", uid));
-//         const querySnapshot = await getDocs(q);
+const useGetUserProfileByUsername = (username) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const showToast = useShowToast();
 
-//         if (querySnapshot.empty) {
-//           dispatch(setUserProfile(null));
-//         } else {
-//           querySnapshot.forEach((doc) => {
-//             const userData = doc.data();
-//             console.log("user data by query ", userData);
-//             dispatch(setUserProfile(userData));
-//             return userData;
-//           });
-//         }
-//       } catch (error) {
-//         showToast("Error", error.message, "error");
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     };
+  const userProfile = useSelector((state) => state.userProfile);
 
-//     getUserProfile();
-//   }, [dispatch, uid, showToast]);
+  const dispatch = useDispatch();
 
-//   return { isLoading, 
-//     // userProfile 
-//   };
-// };
+  useEffect(() => {
+    const getUserProfile = async () => {
+      setIsLoading(true);
+      try {
+        const q = query(
+          collection(firestore, "users"),
+          where("username", "==", username)
+        );
+        const querySnapshot = await getDocs(q);
 
-// export default useGetUserProfileByUsername;
+        if (querySnapshot.empty) return dispatch(setUserProfile(null));
+
+        let userDoc;
+        querySnapshot.forEach((doc) => {
+          userDoc = doc.data();
+        });
+
+        dispatch(setUserProfile(userDoc));
+        console.log(userDoc);
+      } catch (error) {
+        showToast("Error", error.message, "error");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getUserProfile();
+  }, [dispatch, username, showToast]);
+
+  return { isLoading, userProfile };
+};
+
+export default useGetUserProfileByUsername;
