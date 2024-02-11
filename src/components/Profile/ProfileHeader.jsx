@@ -10,11 +10,27 @@ import {
 import React from "react";
 import { useSelector } from "react-redux";
 import EditProfile from "./EditProfile";
+import useFollowUser from "../../Hook/useFollowUser";
 
 function ProfileHeader() {
+  const userProfile = useSelector((state) => state.userProfile.userProfile);
   const authUser = useSelector((state) => state.auth.user);
+  console.log("authUser", authUser, "and", "userProfile", userProfile);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  console.log(authUser);
+  // const visitingOwnProfileAndAuth =
+  //   authUser && authUser.username === userProfile?.username;
+  // const visitingAnotherProfileAndAuth =
+  //   authUser && authUser.username !== userProfile?.username;
+  // test
+
+  const visitingOwnProfileAndAuth =
+    authUser && authUser.username !== userProfile?.username;
+  const visitingAnotherProfileAndAuth =
+    authUser && authUser.username === userProfile?.username;
+
+  const { isUpdating, isFollowing, handleFollowUser } = useFollowUser(
+    userProfile?.uid
+  );
   return (
     <Flex
       gap={{ base: 4, sm: 10 }}
@@ -42,17 +58,32 @@ function ProfileHeader() {
           align={"center"}
         >
           <Text fontSize={{ base: "sm", sm: "lg" }}>{authUser.username}</Text>
-          <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
-            <Button
-              _hover={{ bg: "whiteAlpha.800" }}
-              size={{ base: "xs", md: "sm" }}
-              color={"black"}
-              bg={"white"}
-              onClick={onOpen}
-            >
-              Edit profile
-            </Button>
-          </Flex>
+          {visitingOwnProfileAndAuth && (
+            <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
+              <Button
+                _hover={{ bg: "whiteAlpha.800" }}
+                size={{ base: "xs", md: "sm" }}
+                color={"black"}
+                bg={"white"}
+                onClick={onOpen}
+              >
+                Edit profile
+              </Button>
+            </Flex>
+          )}
+          {visitingAnotherProfileAndAuth && (
+            <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
+              <Button
+                _hover={{ bg: "whiteAlpha.800" }}
+                size={{ base: "xs", md: "sm" }}
+                color={"black"}
+                bg={"white"}
+                onClick={onOpen}
+              >
+                {isFollowing ? "Unfollow" : "Follow"}
+              </Button>
+            </Flex>
+          )}
         </Flex>
         <Flex gap={{ base: 2, sm: 4 }} alignItems={"center"}>
           <Text>

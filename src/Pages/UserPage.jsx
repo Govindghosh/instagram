@@ -11,16 +11,22 @@ import React, { useState } from "react";
 import ProfileHeader from "../components/Profile/ProfileHeader";
 import ProfileTabs from "../components/Profile/ProfileTabs";
 import ProfilePosts from "../components/Profile/ProfilePosts";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useGetUserProfileByUsername from "../Hook/useGetUserProfileByUsername";
 
 function UserPage() {
-  const [isLoading, setIsloading] = useState(false);
-  const userData = useSelector((state) => state.auth.user);
-  const userNotFound = !userData;
-  if (userNotFound) {
-    return <UserNotFound />;
-  }
+  const { username } = useParams();
+
+  //const userData = useSelector((state) => state.auth.user);
+  const { isLoading, userProfile } = useGetUserProfileByUsername(username);
+  const userNotFound = !isLoading && !userProfile;
+  if (userNotFound) return <UserNotFound />;
+
+  // const userNotFound = !userData;
+  // if (userNotFound) {
+  //   return <UserNotFound />;
+  // }
   return (
     <>
       <Container maxW={"container.lg"} py={5}>
@@ -32,7 +38,9 @@ function UserPage() {
           pl={{ base: 4, md: 10 }}
           flexDirection={"column"}
         >
-          {userData && <ProfileHeader />}
+          {/* {userData && <ProfileHeader />}
+          {isLoading && <ProfileHeaderSkeleton />} */}
+          {!isLoading && userProfile && <ProfileHeader />}
           {isLoading && <ProfileHeaderSkeleton />}
         </Flex>
         <Flex
@@ -54,6 +62,7 @@ function UserPage() {
 export default UserPage;
 
 // skeleton for profile header
+
 const ProfileHeaderSkeleton = () => {
   return (
     <Flex
