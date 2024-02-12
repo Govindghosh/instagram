@@ -13,24 +13,24 @@ import EditProfile from "./EditProfile";
 import useFollowUser from "../../Hook/useFollowUser";
 
 function ProfileHeader() {
-  const userProfile = useSelector((state) => state.userProfile.userProfile);
   const authUser = useSelector((state) => state.auth.user);
+  const userProfile = useSelector((state) => state.userProfile.userProfile);
   console.log("authUser", authUser, "and", "userProfile", userProfile);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const visitingOwnProfileAndAuth =
-  //   authUser && authUser.username === userProfile?.username;
-  // const visitingAnotherProfileAndAuth =
-  //   authUser && authUser.username !== userProfile?.username;
-  // test
-
   const visitingOwnProfileAndAuth =
-    authUser && authUser.username !== userProfile?.username;
-  const visitingAnotherProfileAndAuth =
     authUser && authUser.username === userProfile?.username;
+  const visitingAnotherProfileAndAuth =
+    authUser && authUser.username !== userProfile?.username;
 
   const { isUpdating, isFollowing, handleFollowUser } = useFollowUser(
     userProfile?.uid
   );
+
+  // const visitingOwnProfileAndAuth =
+  //   authUser && authUser.username !== userProfile?.username;
+  // const visitingAnotherProfileAndAuth =
+  //   authUser && authUser.username === userProfile?.username;
+
   return (
     <Flex
       gap={{ base: 4, sm: 10 }}
@@ -44,9 +44,9 @@ function ProfileHeader() {
         alignItems={"flex-start"}
       >
         <Avatar
-          src={authUser.profilePicURL}
-          name={authUser.fullName}
-          alt={authUser.fullName}
+          src={userProfile.profilePicURL}
+          name={userProfile.fullName}
+          alt={userProfile.fullName}
         />
       </AvatarGroup>
       <VStack alignItems={"start"} mx={"auto"} flex={1} gap={2}>
@@ -57,7 +57,9 @@ function ProfileHeader() {
           justifyContent={{ base: "center", sm: "flex-start" }}
           align={"center"}
         >
-          <Text fontSize={{ base: "sm", sm: "lg" }}>{authUser.username}</Text>
+          <Text fontSize={{ base: "sm", sm: "lg" }}>
+            {userProfile.username}
+          </Text>
           {visitingOwnProfileAndAuth && (
             <Flex gap={4} alignItems={"center"} justifyContent={"center"}>
               <Button
@@ -78,7 +80,8 @@ function ProfileHeader() {
                 size={{ base: "xs", md: "sm" }}
                 color={"black"}
                 bg={"white"}
-                onClick={onOpen}
+                onClick={handleFollowUser}
+                isLoading={isUpdating}
               >
                 {isFollowing ? "Unfollow" : "Follow"}
               </Button>
@@ -88,28 +91,32 @@ function ProfileHeader() {
         <Flex gap={{ base: 2, sm: 4 }} alignItems={"center"}>
           <Text>
             <Text mr={"1px"} as="span" fontWeight={"bold"}>
-              {authUser.post ? authUser.post.length : 0}
+              {userProfile && userProfile.post ? userProfile.post.length : 0}
             </Text>
             Post
           </Text>
           <Text>
             <Text mr={"1px"} as="span" fontWeight={"bold"}>
-              {authUser.followers ? authUser.followers.length : 0}
+              {userProfile && userProfile.followers
+                ? userProfile.followers.length
+                : 0}
             </Text>
             followers
           </Text>
           <Text>
             <Text mr={"1px"} as="span" fontWeight={"bold"}>
-              {authUser.following ? authUser.following.length : 0}
+              {userProfile && userProfile.following
+                ? userProfile.following.length
+                : 0}
             </Text>
             following
           </Text>
         </Flex>
         <Flex>
-          <Text>{authUser.fullName}</Text>
+          <Text>{userProfile.fullName}</Text>
         </Flex>
         <Flex>
-          <Text>{authUser.bio}</Text>
+          <Text>{userProfile.bio}</Text>
         </Flex>
       </VStack>
       {isOpen && <EditProfile isOpen={isOpen} onClose={onClose} />}

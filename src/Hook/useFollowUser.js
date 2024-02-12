@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import useShowToast from "./useShowToast";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { firestore } from "../Firebase/firebaseConfig";
 
+useDispatch;
 const useFollowUser = (userID) => {
+  const dispatch = useDispatch();
   const [isUpdating, setIsUpdating] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const showToast = useShowToast();
@@ -35,10 +37,12 @@ const useFollowUser = (userID) => {
           : arrayUnion(authUser.uid),
       });
       if (isFollowing) {
-        setAuthUser({
-          ...authUser,
-          following: authUser.following.filter((uid) => uid !== userID),
-        });
+        dispatch(
+          setAuthUser({
+            ...authUser,
+            following: authUser.following.filter((uid) => uid !== userID),
+          })
+        );
         setUserProfile({
           ...userProfile,
           followers: userProfile.followers.filter(
@@ -54,10 +58,12 @@ const useFollowUser = (userID) => {
         );
         setIsFollowing(false);
       } else {
-        setAuthUser({
-          ...authUser,
-          following: [...authUser.following, userID],
-        });
+        dispatch(
+          setAuthUser({
+            ...authUser,
+            following: [...authUser.following, userID],
+          })
+        );
         setUserProfile({
           ...userProfile,
           followers: [...userProfile.followers, authUser.uid],
