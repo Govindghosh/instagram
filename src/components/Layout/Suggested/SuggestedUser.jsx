@@ -1,22 +1,31 @@
-import React, { useState } from 'react'
-import {
-  Flex,
-  Text,
-  Avatar,
-  Button,
- } from "@chakra-ui/react";
+import React, { useState } from "react";
+import { Flex, Link, Avatar, Button, VStack, Box } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { Link as RouterLink } from "react-router-dom";
+import useFollowUser from "../../../Hook/useFollowUser";
 
-function SuggestedUser() {
-  const [isFollow, setIsFollow]=useState(false);
+function SuggestedUser({ user }) {
+  const { isUpdating, isFollowing, handleFollowUser } = useFollowUser(user.uid);
+  const authUser = useSelector((state) => state.auth.user);
   return (
     <>
       <Flex align={"center"} justifyContent={"space-between"} w={"full"}>
-          <Flex alignItems={"center"} gap={2}>
-            <Avatar src="/profilepic.png" name="Govind Ghosh"></Avatar>
-            <Text fontWeight={"bold"} fontSize={14}>
-              GovindGhosh
-            </Text>
-          </Flex>
+        <Flex alignItems={"center"} gap={2}>
+          <Link to={`/${user.username}`}>
+            <Avatar src={user.profilePicURL} size={"md"} />
+          </Link>
+          <VStack spacing={2} alignItems={"flex-start"}>
+            <Link to={`/${user.username}`}>
+              <Box fontSize={12} fontWeight={"bold"}>
+                {user.fullName}
+              </Box>
+            </Link>
+            <Box fontSize={11} color={"gray.500"}>
+              {user.followers.length} followers
+            </Box>
+          </VStack>
+        </Flex>
+        {authUser.uid !== user.uid && (
           <Button
             color={"blue.600"}
             fontSize={12}
@@ -24,13 +33,15 @@ function SuggestedUser() {
             _hover={{ color: "gray.300" }}
             cursor={"pointer"}
             bg={"transparent"}
-            onClick={()=>setIsFollow(!isFollow)}
+            onClick={handleFollowUser}
+            isLoading={isUpdating}
           >
-            {isFollow?"Unfollow":"Follow"}
+            {isFollowing ? "Unfollow" : "Follow"}
           </Button>
-        </Flex>
+        )}
+      </Flex>
     </>
-  )
+  );
 }
 
 export default SuggestedUser;

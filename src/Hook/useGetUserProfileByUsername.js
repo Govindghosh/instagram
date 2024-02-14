@@ -21,12 +21,10 @@ const useGetUserProfileByUsername = (username) => {
         );
         const querySnapshot = await getDocs(q);
         if (querySnapshot.empty) {
-          
           dispatch(setUserProfile(null));
         } else {
           const userDoc = querySnapshot.docs[0].data();
           dispatch(setUserProfile(userDoc));
-          
         }
       } catch (error) {
         showToast("Error", error.message, "error");

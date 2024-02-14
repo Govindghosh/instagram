@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   Box,
   Button,
@@ -15,10 +15,19 @@ import {
   Tooltip,
   useDisclosure,
 } from "@chakra-ui/react";
-import SuggestedUser from "../Suggested/SuggestedUsers";
+import SuggestedUser from "../Suggested/SuggestedUser";
 import { SearchLogo } from "../../../assets/constants";
+import useSearchUers from "../../../Hook/useSearchUers";
 
 function Search() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const searchRef = useRef(null);
+  const { isLoading, getUserProfile, user } = useSearchUers();
+  const handleSearchUser = (e) => {
+    e.preventDefault();
+    getUserProfile(searchRef.current.value);
+  };
+  console.log(user);
   return (
     <>
       <Tooltip
@@ -37,11 +46,40 @@ function Search() {
           p={2}
           w={{ base: 10, md: "full" }}
           justifyContent={{ base: "center", md: "flex-start" }}
+          onClick={onOpen}
         >
           <SearchLogo />
           <Box display={{ base: "none", md: "block" }}>Search</Box>
         </Flex>
       </Tooltip>
+
+      <Modal isOpen={isOpen} onClose={onClose} motionPreset="sideInLeft">
+        <ModalOverlay />
+        <ModalContent maxW={"400px"} bg={"black"} border={"1px solid gray"}>
+          <ModalHeader>Search User</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            <form onSubmit={handleSearchUser}>
+              <FormControl>
+                <FormLabel>Username</FormLabel>
+                <Input placeholder="Search Username" ref={searchRef} />
+              </FormControl>
+              <Flex w={"full"} justifyContent={"flex-end"}>
+                <Button
+                  type="submit"
+                  ml={"auto"}
+                  size={"sm"}
+                  my={4}
+                  isLoading={isLoading}
+                >
+                  Search
+                </Button>
+              </Flex>
+            </form>
+            {user && <SuggestedUser user={user}/> }
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 }

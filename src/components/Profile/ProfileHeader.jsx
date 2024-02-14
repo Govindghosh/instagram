@@ -26,11 +26,6 @@ function ProfileHeader() {
     userProfile?.uid
   );
 
-  // const visitingOwnProfileAndAuth =
-  //   authUser && authUser.username !== userProfile?.username;
-  // const visitingAnotherProfileAndAuth =
-  //   authUser && authUser.username === userProfile?.username;
-
   return (
     <Flex
       gap={{ base: 4, sm: 10 }}
@@ -79,7 +74,8 @@ function ProfileHeader() {
                 _hover={{ bg: "whiteAlpha.800" }}
                 size={{ base: "xs", md: "sm" }}
                 color={"black"}
-                bg={"white"}
+                // bg={"white"}
+                bg={isFollowing ? "whitesmoke" : "blue.300"}
                 onClick={handleFollowUser}
                 isLoading={isUpdating}
               >
