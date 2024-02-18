@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from "react";
+//import React from "react";
 import SuggestedHeader from "./SuggestedHeader";
-import {
-  Flex,
-  VStack,
-  Text,
-  Button,
-  Avatar,
-  Box,
-  Link,
-} from "@chakra-ui/react";
+import { Flex, VStack, Text, Button, Box, Link } from "@chakra-ui/react";
 import SuggestedUser from "./SuggestedUser";
-import useGitHubData from '../../../assets/githubAPI'
-
-
+import useGitHubData from "../../../assets/githubAPI";
+import useGetSuggestedUsers from "../../../Hook/useGetSuggestedUsers";
 
 function SuggestedUsers() {
-      const data = useGitHubData();
-      
+  const data = useGitHubData();
+  const { isLoading, suggestedUsers } = useGetSuggestedUsers();
+
+  if (isLoading) return null;
+
   return (
     <>
       <VStack py={8} px={6} gap={4}>
@@ -36,21 +30,22 @@ function SuggestedUsers() {
             See All
           </Button>
         </Flex>
-        <SuggestedUser/>
-        <SuggestedUser/>
+        {suggestedUsers.map((user) => (
+          <SuggestedUser user={user} key={user.id} />
+        ))}
+        <SuggestedUser />
         <Box
           fontSize={12}
           fontWeight="bold"
-          _hover={{ color: "gray.300" }}
           color={"gray"}
           mt={5}
           alignSelf={"start"}
         >
           &copy; 2023 Built by{" "}
-          <Link 
-          href={data.html_url}
-          target="blank"
-          style={{ textDecoration: "none" }}>{data.name}{data.bio}</Link>
+          <Link href={data.html_url} target="_blank" textDecoration="none">
+            {data.name}
+          </Link>{" "}
+          {data.bio}
         </Box>
       </VStack>
     </>

@@ -22,7 +22,7 @@ import useSearchUers from "../../../Hook/useSearchUers";
 function Search() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const searchRef = useRef(null);
-  const { isLoading, getUserProfile, user } = useSearchUers();
+  const { isLoading, getUserProfile, user, setUser } = useSearchUers();
   const handleSearchUser = (e) => {
     e.preventDefault();
     getUserProfile(searchRef.current.value);
@@ -76,7 +76,7 @@ function Search() {
                 </Button>
               </Flex>
             </form>
-            {user && <SuggestedUser user={user}/> }
+            {user && <SuggestedUser user={user} setUser={setUser} />}
           </ModalBody>
         </ModalContent>
       </Modal>

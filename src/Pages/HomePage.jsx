@@ -12,8 +12,6 @@ function HomePage() {
             flex={2}
             pt={"120px"}
             pb={20}
-
-            //border={"1px solid blue"}
           >
             <Feed />
           </Box>
@@ -23,11 +21,9 @@ function HomePage() {
             display={{ base: "none", lg: "block" }}
             pt={1}
             pb={15}
-            //py={2}
-            //border={"1px solid red"}
             maxW={"20vw"}
           >
-            {/* <SuggestedUsers/> */}
+            {/* <SuggestedUsers /> */}
           </Box>
         </Flex>
       </Container>

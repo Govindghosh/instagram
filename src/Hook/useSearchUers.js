@@ -9,7 +9,7 @@ const useSearchUers = () => {
   const showToast = useShowToast();
 
   const getUserProfile = async (username) => {
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       const q = query(
         collection(firestore, "users"),
@@ -28,7 +28,7 @@ const useSearchUers = () => {
       setIsLoading(false);
     }
   };
-  return { isLoading, getUserProfile, user };
+  return { isLoading, getUserProfile, user, setUser };
 };
 
 export default useSearchUers;
