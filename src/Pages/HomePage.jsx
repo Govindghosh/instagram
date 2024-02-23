@@ -8,11 +8,7 @@ function HomePage() {
     <>
       <Container maxW={"container.lg"}>
         <Flex gap={5}>
-          <Box
-            flex={2}
-            pt={"120px"}
-            pb={20}
-          >
+          <Box flex={2} pt={"120px"} pb={20}>
             <Feed />
           </Box>
           <Box
@@ -23,7 +19,7 @@ function HomePage() {
             pb={15}
             maxW={"20vw"}
           >
-            {/* <SuggestedUsers /> */}
+            <SuggestedUsers />
           </Box>
         </Flex>
       </Container>
