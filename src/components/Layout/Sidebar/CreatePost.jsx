@@ -20,11 +20,28 @@ import { CreatePostLogo } from "../../../assets/constants";
 import { BsFillImageFill } from "react-icons/bs";
 import usePreviewImg from "../../../Hook/usePreviewImg";
 import { useRef, useState } from "react";
+import useCreatePost from "../../../Hook/useCreatePost";
+import useShowToast from "../../../Hook/useShowToast";
+
 function CreatePost() {
+  const showToast = useShowToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { caption, setcaption } = useState("");
+  const [caption, setCaption] = useState("");
   const imageRef = useRef(null);
   const { selectedFile, handleImageChange, setSelectedFile } = usePreviewImg();
+  const { isLoading, handleCreatePost } = useCreatePost(); // Updated
+
+  const handlePostCreation = async () => {
+    try {
+      // Set loading to true before post creation
+      handleCreatePost(selectedFile, caption); // Removed await
+      onClose();
+      setCaption(""); // Clear caption after successful post creation
+      setSelectedFile(null); // Clear selected file after successful post creation
+    } catch (error) {
+      showToast("Error", error.message, "error");
+    }
+  };
 
   return (
     <>
@@ -60,7 +77,7 @@ function CreatePost() {
             <Textarea
               placeholder="Post caption..."
               value={caption}
-              onChange={(e) => setcaption(e.target.value)}
+              onChange={(e) => setCaption(e.target.value)}
             />
             <Input
               type="file"
@@ -98,7 +115,13 @@ function CreatePost() {
           </ModalBody>
 
           <ModalFooter>
-            <Button mr={3}>Post</Button>
+            <Button
+              mr={3}
+              onClick={handlePostCreation}
+              isLoading={isLoading} // Updated
+            >
+              Post
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
