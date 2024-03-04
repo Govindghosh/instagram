@@ -87,7 +87,7 @@ function ProfileHeader() {
         <Flex gap={{ base: 2, sm: 4 }} alignItems={"center"}>
           <Text>
             <Text mr={"1px"} as="span" fontWeight={"bold"}>
-              {userProfile && userProfile.post ? userProfile.post.length : 0}
+              {userProfile && userProfile.posts ? userProfile.posts.length : 0}
             </Text>
             Post
           </Text>

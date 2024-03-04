@@ -29,15 +29,14 @@ function CreatePost() {
   const [caption, setCaption] = useState("");
   const imageRef = useRef(null);
   const { selectedFile, handleImageChange, setSelectedFile } = usePreviewImg();
-  const { isLoading, handleCreatePost } = useCreatePost(); // Updated
+  const { isLoading, handleCreatePost } = useCreatePost();
 
   const handlePostCreation = async () => {
     try {
-      // Set loading to true before post creation
-      handleCreatePost(selectedFile, caption); // Removed await
+      await handleCreatePost(selectedFile, caption);
       onClose();
-      setCaption(""); // Clear caption after successful post creation
-      setSelectedFile(null); // Clear selected file after successful post creation
+      setCaption("");
+      setSelectedFile(null);
     } catch (error) {
       showToast("Error", error.message, "error");
     }
@@ -115,11 +114,7 @@ function CreatePost() {
           </ModalBody>
 
           <ModalFooter>
-            <Button
-              mr={3}
-              onClick={handlePostCreation}
-              isLoading={isLoading} // Updated
-            >
+            <Button mr={3} onClick={handlePostCreation} isLoading={isLoading}>
               Post
             </Button>
           </ModalFooter>

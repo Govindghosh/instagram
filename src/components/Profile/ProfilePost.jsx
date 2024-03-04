@@ -12,10 +12,6 @@ import {
   useDisclosure,
   Avatar,
   Divider,
-  Input,
-  InputGroup,
-  InputRightElement,
-  Button,
   VStack,
 } from "@chakra-ui/react";
 import Comment from "/src/components/Comment/Comment";
@@ -26,7 +22,7 @@ import { SlOptions } from "react-icons/sl";
 import FeedFooter from "../Feed/FeedFooter";
 import { useSelector } from "react-redux";
 
-function ProfilePost({ img }) {
+function ProfilePost({ post }) {
   const authUser = useSelector((state) => state.auth.user);
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(" ");
@@ -98,7 +94,13 @@ function ProfilePost({ img }) {
             </Flex>
           </Flex>
         </Flex>
-        <Image src={img} alt="pro" objectFit="cover" w="100%" h="100%" />
+        <Image
+          src={post.imageURL}
+          alt="pro"
+          objectFit="cover"
+          w="100%"
+          h="100%"
+        />
       </GridItem>
       <Modal
         isOpen={isOpen}
@@ -124,7 +126,7 @@ function ProfilePost({ img }) {
                 borderColor={"whiteAlpha.300"}
                 flex={1.5}
               >
-                <Image src={img} alt="pro" />
+                <Image src={post.imageURL} alt="pro" />
               </Box>
               <Flex
                 flex={1}
