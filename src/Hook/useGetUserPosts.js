@@ -9,7 +9,7 @@ const useGetUserPosts = () => {
   const [isLoading, setIsLoading] = useState(true);
   const showToast = useShowToast();
   const dispatch = useDispatch();
-  const userProfile = useSelector((state) => state.userProfile);
+  const userProfile = useSelector((state) => state.userProfile.userProfile);
   const posts = useSelector((state) => state.posts.posts);
 
   useEffect(() => {
