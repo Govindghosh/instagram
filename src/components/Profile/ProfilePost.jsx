@@ -6,27 +6,36 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  Box,
   ModalOverlay,
   Text,
   useDisclosure,
   Avatar,
   Divider,
   VStack,
+  Button,
 } from "@chakra-ui/react";
 import Comment from "/src/components/Comment/Comment";
 import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
-import { SlOptions } from "react-icons/sl";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import FeedFooter from "../Feed/FeedFooter";
 import { useSelector } from "react-redux";
+import useDeletePost from "../../Hook/useDeletePost";
 
 function ProfilePost({ post }) {
   const authUser = useSelector((state) => state.auth.user);
+  const userProfile = useSelector((state) => state.userProfile.userProfile);
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(" ");
   const [comment, setComment] = useState("");
+  const { isDeleting, deletePost } = useDeletePost();
+
+  const handleDeletePost = async () => {
+    if (!window.confirm("Are you sure you want to DELETE this post?")) return;
+    deletePost(post?.id);
+  };
+
   const handleLikes = () => {
     if (liked) {
       setLiked(false);
@@ -83,13 +92,13 @@ function ProfilePost({ post }) {
             <Flex>
               <AiFillHeart size={20} />
               <Text fontWeight="bold" ml={2}>
-                7
+                {post.likes ? post.likes.length : 0}
               </Text>
             </Flex>
             <Flex>
               <FaComment size={20} />
               <Text fontWeight="bold" ml={2}>
-                7
+                {post.comments ? post.comments.length : 0}
               </Text>
             </Flex>
           </Flex>
@@ -118,16 +127,20 @@ function ProfilePost({ post }) {
               gap={4}
               mx={"auto"}
               w={{ base: "90%", sm: "70%", md: "full" }}
+              maxH={"90vh"}
+              minH={"50vh"}
             >
-              <Box
+              <Flex
                 borderRadius={3}
                 overflow={"hidden"}
                 border={"1px solid"}
                 borderColor={"whiteAlpha.300"}
                 flex={1.5}
+                justifyContent={"center"}
+                alignItems={"center"}
               >
                 <Image src={post.imageURL} alt="pro" />
-              </Box>
+              </Flex>
               <Flex
                 flex={1}
                 flexDir={"column"}
@@ -138,17 +151,26 @@ function ProfilePost({ post }) {
                 <Flex alignItems={"center"} justifyContent={"space-between"}>
                   <Flex alignItems={"center"} gap={4}>
                     <Avatar
-                      src={authUser?.profilePicURL}
+                      src={userProfile?.profilePicURL}
                       size={"sm"}
-                      name={authUser?.fullName}
+                      name={userProfile?.fullName}
                     />
                     <Text fontWeight={"bold"} fontSize={12}>
-                      {authUser?.fullName}
+                      {userProfile?.fullName}
                     </Text>
                   </Flex>
-                  <Box borderRadius={3} p={1}>
-                    <SlOptions size={20} cursor={"pointer"} />
-                  </Box>
+                  {authUser.uid === userProfile.uid && (
+                    <Button
+                      color={"black"}
+                      borderRadius={3}
+                      p={1}
+                      _hover={{ color: "red.500" }}
+                      onClick={handleDeletePost}
+                      isLoading={isDeleting}
+                    >
+                      <RiDeleteBin6Line size={20} cursor={"pointer"} />
+                    </Button>
+                  )}
                 </Flex>
                 <Divider bg={"gray.300"} />
                 <VStack

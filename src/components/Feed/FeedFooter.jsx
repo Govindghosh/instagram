@@ -1,18 +1,26 @@
-import { Box, Flex, Text, Input, InputGroup, InputRightElement, Button } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Text,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Button,
+} from "@chakra-ui/react";
 import React, { useState } from "react";
 //import { GoHeart } from "react-icons/go";
 import { FiSend } from "react-icons/fi";
 import {
-  CommentLogo,
-  NotificationsLogo,
+  CommentLogoLight,
+  NotificationsLogoLight,
   UnlikeLogo,
-  SaveLogo
+  SaveLogo,
 } from "../../assets/constants";
 
-function FeedFooter({userName, isProfilePage}) {
+function FeedFooter({ userName, isProfilePage }) {
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(" ");
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const handleLikes = () => {
     if (liked) {
       setLiked(false);
@@ -23,29 +31,25 @@ function FeedFooter({userName, isProfilePage}) {
     }
   };
   const handlePostComment = () => {
-    console.log('Posting comment:', comment);
-    setComment('');
+    console.log("Posting comment:", comment);
+    setComment("");
   };
 
   return (
-    <Box mb={10}
-    mt={"auto"}
-    >
+    <Box mb={10} mt={"auto"}>
       <Flex
-        
         alignItems={"center"}
         gap={4}
         w={"full"}
         pt={0}
         mb={2}
         cursor={"pointer"}
-        
       >
         <Box onClick={handleLikes}>
-          {!liked ? <NotificationsLogo /> : <UnlikeLogo />}
+          {!liked ? <NotificationsLogoLight /> : <UnlikeLogo />}
         </Box>
         <Box>
-          <CommentLogo />
+          <CommentLogoLight />
         </Box>
         <Box>
           <FiSend size={25} />
@@ -59,42 +63,46 @@ function FeedFooter({userName, isProfilePage}) {
       </Text>
       {!isProfilePage && (
         <>
-        <Text fontWeight={600} fontSize={"sm"}>
-        {userName}{" "}
-        <Text as="span" fontWeight={300}>
-          userCaption
-        </Text>
-      </Text>
-      <Text fontSize={"sm"} color={"gray"}>
-        View all 38 comments
-      </Text>
+          <Text fontWeight={600} fontSize={"sm"}>
+            {userName}{" "}
+            <Text as="span" fontWeight={300}>
+              userCaption
+            </Text>
+          </Text>
+          <Text fontSize={"sm"} color={"gray"}>
+            View all 38 comments
+          </Text>
         </>
       )}
-      
-      <Flex 
-      alignItems={"center"}
-      gap={2}
-      w={"full"}
-      justifyContent={"space-between"}
+
+      <Flex
+        alignItems={"center"}
+        gap={2}
+        w={"full"}
+        justifyContent={"space-between"}
       >
         <InputGroup>
-        <Input
-        placeholder="Add a comment…"
-        fontSize={14}
-        variant={"flushed"}
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        />
-        
-          <InputRightElement>
-          {comment && ( <Button
-            bg={"transparent"}
+          <Input
+            placeholder="Add a comment…"
             fontSize={14}
-            color={"blue.500"}
-            fontWeight={500}
-            _hover={{color: "gray.400"}}
-            onClick={handlePostComment}
-            >Post</Button> )}
+            variant={"flushed"}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          />
+
+          <InputRightElement>
+            {comment && (
+              <Button
+                bg={"transparent"}
+                fontSize={14}
+                color={"blue.500"}
+                fontWeight={500}
+                _hover={{ color: "gray.400" }}
+                onClick={handlePostComment}
+              >
+                Post
+              </Button>
+            )}
           </InputRightElement>
         </InputGroup>
       </Flex>
