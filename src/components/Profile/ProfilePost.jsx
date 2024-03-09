@@ -14,13 +14,13 @@ import {
   VStack,
   Button,
 } from "@chakra-ui/react";
-
+import { timeAgo } from "../../utils/timeAgo";
 import { useState } from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { FaComment } from "react-icons/fa";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import FeedFooter from "../Feed/FeedFooter";
-import { useSelector } from "react-redux";
+
 import useDeletePost from "../../Hook/useDeletePost";
 import Comment from "../Comment/Comment";
 
@@ -175,6 +175,9 @@ function ProfilePost({ post }) {
                   overflowY={"auto"}
                   maxH={"350px"}
                 >
+                  {/* caption */}
+                  {post.caption && <Caption post={post} />}
+                  {/* comments */}
                   {post.comments &&
                     post.comments.map((comment) => (
                       <Comment key={comment.id} comment={comment} />
@@ -191,6 +194,35 @@ function ProfilePost({ post }) {
 }
 
 export default ProfilePost;
+
+//caption
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+const Caption = (post) => {
+  const userProfile = useSelector((state) => state.userProfile.userProfile);
+  return (
+    <>
+      <Flex gap={4}>
+        <Link to={`/user/${userProfile?.username}`}>
+          <Avatar src={userProfile?.profilePicURL} size={"sm"} />
+        </Link>
+        <Flex direction={"column"}>
+          <Flex gap={2}>
+            <Link to={`/user/${userProfile?.username}`}>
+              <Text fontWeight={"bold"} fontSize={12}>
+                {userProfile?.username}
+              </Text>
+            </Link>
+            <Text fontSize={12}>{post?.caption}</Text>
+          </Flex>
+          <Text fontSize={10} color={"gray.600"}>
+            {timeAgo(post?.createdAt)}
+          </Text>
+        </Flex>
+      </Flex>
+    </>
+  );
+};
 
 //
 

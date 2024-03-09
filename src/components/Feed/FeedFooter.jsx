@@ -7,7 +7,7 @@ import {
   InputRightElement,
   Button,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 //import { GoHeart } from "react-icons/go";
 import { FiSend } from "react-icons/fi";
 import {

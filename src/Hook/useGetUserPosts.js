@@ -26,7 +26,7 @@ const useGetUserPosts = () => {
         querySnapshot.forEach((doc) => {
           posts.push({ ...doc.data(), id: doc.id });
         });
-        posts.sort((a, b) => b.createdAt - a.createdAt);
+        posts.sort((a, b) => a.createdAt - b.createdAt);
         dispatch(setPosts(posts));
       } catch (error) {
         showToast("Error", error.message, "error");
