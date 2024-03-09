@@ -29,7 +29,7 @@ function ProfilePost({ post }) {
   const userProfile = useSelector((state) => state.userProfile.userProfile);
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(" ");
-  const { isDeleting, deletePost } = useDeletePost();
+  const { isDeleting, deletePost } = useDeletePost(post);
 
   const handleDeletePost = async () => {
     if (!window.confirm("Are you sure you want to DELETE this post?")) return;

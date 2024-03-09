@@ -7,12 +7,12 @@ import { firestore, storage } from "../Firebase/firebaseConfig";
 import { arrayRemove, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import useShowToast from "./useShowToast";
 
-const useDeletePost = () => {
+const useDeletePost = (post) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const showToast = useShowToast();
   const dispatch = useDispatch();
   const authUser = useSelector((state) => state.auth.user);
-  const post = useSelector((state) => state.posts.posts);
+  // const post = useSelector((state) => state.posts.posts);
 
   const deletePost = async () => {
     if (isDeleting) return;
