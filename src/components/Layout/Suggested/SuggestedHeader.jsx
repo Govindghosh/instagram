@@ -10,9 +10,9 @@ function SuggestedHeader() {
     <>
       <Flex justifyContent={"space-between"} alignItems={"center"} w={"full"}>
         <Flex alignItems={"center"} gap={2}>
-          <Avatar src="/profilepic.png" name="Govind Ghosh"></Avatar>
+          <Avatar src={authUser?.profilePicURL} name={authUser?.fullName}></Avatar>
           <Text fontWeight={"bold"} fontSize={14}>
-            GovindGhosh
+          {authUser?.fullName}
           </Text>
         </Flex>
         <Link
