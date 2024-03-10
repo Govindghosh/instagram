@@ -18,7 +18,8 @@ import {
 } from "../../assets/constants";
 import usePostComment from "../../Hook/usePostComment";
 import useLikePost from "../../Hook/useLikePost";
-function FeedFooter({ userName, isProfilePage, post }) {
+import { timeAgo } from "../../utils/timeAgo";
+function FeedFooter({ isProfilePage, post, creatorProfile }) {
   const [likeCount, setLikeCount] = useState(0);
   const [comment, setComment] = useState("");
   const commentRef = useRef(null);
@@ -60,16 +61,21 @@ function FeedFooter({ userName, isProfilePage, post }) {
       <Text fontWeight={500} fontSize={"sm"}>
         {likeCount} likes
       </Text>
+      {isProfilePage && (
+        <Text color={"gray"} fontSize="12">
+          Posted {timeAgo(post.createAt)}
+        </Text>
+      )}
       {!isProfilePage && (
         <>
           <Text fontWeight={600} fontSize={"sm"}>
-            {userName}{" "}
+            {creatorProfile?.username}{" "}
             <Text as="span" fontWeight={300}>
-              userCaption
+              {post?.caption}
             </Text>
           </Text>
           <Text fontSize={"sm"} color={"gray"}>
-            View all 38 comments
+            View all {post?.comments.length} comments
           </Text>
         </>
       )}

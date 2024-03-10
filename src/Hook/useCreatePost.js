@@ -18,8 +18,6 @@ const useCreatePost = () => {
   const showToast = useShowToast();
   const [isLoading, setIsLoading] = useState(false); // Correct initialization
   const authUser = useSelector((state) => state.auth.user);
-  
-  
 
   const handleCreatePost = async (selectedFile, caption) => {
     if (isLoading) return;
@@ -30,7 +28,7 @@ const useCreatePost = () => {
       likes: [],
       comments: [], // corrected "Comments" to "comments"
       createdBy: authUser.uid,
-      createAt: formatDate(Date.now()),
+      createAt: Date.now(),
     };
     try {
       const postDocRef = await addDoc(collection(firestore, "posts"), newPost);
@@ -55,17 +53,3 @@ const useCreatePost = () => {
 };
 
 export default useCreatePost;
-function formatDate(timestamp) {
-  const currentDate = new Date(timestamp);
-
-  // Get components of the date
-  const day = currentDate.getDate().toString().padStart(2, '0');
-  const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
-  const year = currentDate.getFullYear().toString().slice(-2);
-  const hours = currentDate.getHours().toString().padStart(2, '0');
-  const minutes = currentDate.getMinutes().toString().padStart(2, '0');
-  const seconds = currentDate.getSeconds().toString().padStart(2, '0');
-  const milliseconds = currentDate.getMilliseconds().toString().padStart(3, '0');
-
-  // Format the date string
-  return `${day}-${month}-${year}, ${hours}:${minutes}:${seconds}.${milliseconds}`;}
