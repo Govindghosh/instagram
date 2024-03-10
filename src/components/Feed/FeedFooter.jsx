@@ -7,7 +7,7 @@ import {
   InputRightElement,
   Button,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 //import { GoHeart } from "react-icons/go";
 import { FiSend } from "react-icons/fi";
 import {
@@ -17,21 +17,18 @@ import {
   SaveLogo,
 } from "../../assets/constants";
 import usePostComment from "../../Hook/usePostComment";
-
+import useLikePost from "../../Hook/useLikePost";
 function FeedFooter({ userName, isProfilePage, post }) {
-  const [liked, setLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(" ");
+  const [likeCount, setLikeCount] = useState(0);
   const [comment, setComment] = useState("");
-  const handleLikes = () => {
-    if (liked) {
-      setLiked(false);
-      setLikeCount(likeCount - 1);
-    } else {
-      setLiked(true);
-      setLikeCount(likeCount + 1);
-    }
-  };
+  const commentRef = useRef(null);
+  const { isLiked, likes, handleLikePost } = useLikePost(post || {});
   const { handlePostComment, isCommenting } = usePostComment();
+  useEffect(() => {
+    if (post && post.likes) {
+      setLikeCount(post.likes.length);
+    }
+  }, [post]);
   const handleSubmitComment = async () => {
     await handlePostComment(post.id, comment);
     setComment("");
@@ -47,10 +44,10 @@ function FeedFooter({ userName, isProfilePage, post }) {
         mb={2}
         cursor={"pointer"}
       >
-        <Box onClick={handleLikes}>
-          {!liked ? <NotificationsLogoLight /> : <UnlikeLogo />}
+        <Box onClick={handleLikePost}>
+          {!isLiked ? <NotificationsLogoLight /> : <UnlikeLogo />}
         </Box>
-        <Box>
+        <Box onClick={() => commentRef.current.focus()}>
           <CommentLogoLight />
         </Box>
         <Box>
@@ -90,6 +87,7 @@ function FeedFooter({ userName, isProfilePage, post }) {
             variant={"flushed"}
             value={comment}
             onChange={(e) => setComment(e.target.value)}
+            ref={commentRef}
           />
 
           <InputRightElement>

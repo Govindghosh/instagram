@@ -39,9 +39,9 @@ function ProfileHeader() {
         alignItems={"flex-start"}
       >
         <Avatar
-          src={userProfile.profilePicURL}
-          name={userProfile.fullName}
-          alt={userProfile.fullName}
+          src={userProfile?.profilePicURL}
+          name={userProfile?.fullName}
+          alt={userProfile?.fullName}
         />
       </AvatarGroup>
       <VStack alignItems={"start"} mx={"auto"} flex={1} gap={2}>

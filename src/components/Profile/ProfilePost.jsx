@@ -216,7 +216,7 @@ const Caption = (post) => {
             <Text fontSize={12}>{post?.caption}</Text>
           </Flex>
           <Text fontSize={10} color={"gray.600"}>
-            {timeAgo(post?.createdAt)}
+            {timeAgo(post?.createAt)}
           </Text>
         </Flex>
       </Flex>
