@@ -1,5 +1,9 @@
 # Instagram Project
-
+<img src="/screenshot/login.jpg" alt="login" width="100%">
+<img src="/screenshot/sign up.jpg" alt="login" width="100%">
+<img src="/screenshot/feed.jpg" alt="login" width="100%">
+<img src="/screenshot/profile.jpg" alt="login" width="100%">
+<img src="/screenshot/create post.jpg" alt="login" width="100%">
 ## Overview
 Welcome to Instagram, a project aimed at providing a user-friendly social media experience. This project leverages a modern tech stack to deliver a seamless and engaging platform. With a combination of React, Firebase, and other powerful libraries, Instagram brings social connectivity to life.
 
